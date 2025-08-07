@@ -7,15 +7,26 @@
 
 import SwiftUI
 
+struct Book: Identifiable, Hashable {
+    let id = UUID() // Automatic and unique
+    let title: String
+    let image: String
+    let description: String
+}
+
 struct ContentView: View {
+    let books: [Book] = getItems()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            List(books) { currentItem in
+                NavigationLink(destination: detailView(book: currentItem)) {
+                    LinkView(item: currentItem)
+                }
+            }
+            .navigationTitle("LOTR Trilogy")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .padding()
     }
 }
 
