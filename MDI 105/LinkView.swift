@@ -4,8 +4,7 @@
 //
 //  Ceated by Roy Dimapilis on 8/6/25.
 //
-
-import SwiftUI
+import SwiftUI 
 
 struct LinkView: View {
     let item: Book
@@ -14,14 +13,28 @@ struct LinkView: View {
         HStack {
             Image(item.image)
                 .resizable()
-                .frame(width: 47, height: 47)
-                .scaledToFit()
-            Text(item.title)
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 60, height: 80)
+                .cornerRadius(8)
+                .clipped()
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(item.title)
+                    .font(.headline)
+                    .lineLimit(2)
+                
+                Text("by \(item.author)")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+            }
+            
+            Spacer()
         }
-        .border(Color.black, width: 2)
-        
+        .padding(.vertical, 4)
     }
 }
 #Preview {
     ContentView()
+    
 }

@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct detailView: View {
+struct BookDetailView: View {
     let book: Book
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: 20) {
                 Image(book.image)
                     .resizable()
                     .scaledToFit()
@@ -22,6 +22,10 @@ struct detailView: View {
                 Text(book.title)
                     .font(.title)
                     .fontWeight(.bold)
+                
+                Text("by \(book.author)")
+                    .font(.title2)
+                    .foregroundColor(.secondary)
                 
                 Text(book.description)
                     .font(.body)
@@ -37,4 +41,5 @@ struct detailView: View {
 }
 #Preview {
     ContentView()
+    
 }

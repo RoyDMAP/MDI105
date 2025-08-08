@@ -10,6 +10,7 @@ import SwiftUI
 struct Book: Identifiable, Hashable {
     let id = UUID() // Automatic and unique
     let title: String
+    let author: String
     let image: String
     let description: String
 }
@@ -20,7 +21,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List(books) { currentItem in
-                NavigationLink(destination: detailView(book: currentItem)) {
+                NavigationLink(destination: BookDetailView(book: currentItem)) {
                     LinkView(item: currentItem)
                 }
             }
