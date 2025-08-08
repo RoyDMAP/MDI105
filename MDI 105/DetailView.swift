@@ -31,6 +31,13 @@ struct BookDetailView: View {
                     .font(.body)
                     .foregroundColor(.secondary)
                 
+                Button("Do something") {
+                                    // Add your action here
+                                    print("Button tapped for \(book.title)")
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .frame(maxWidth: .infinity)
+                
                 Spacer()
             }
             .padding()

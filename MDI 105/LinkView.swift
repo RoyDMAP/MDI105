@@ -4,7 +4,7 @@
 //
 //  Ceated by Roy Dimapilis on 8/6/25.
 //
-import SwiftUI 
+import SwiftUI
 
 struct LinkView: View {
     let item: Book
@@ -30,6 +30,8 @@ struct LinkView: View {
             }
             
             Spacer()
+            
+            
         }
         .padding(.vertical, 4)
     }
