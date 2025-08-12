@@ -13,7 +13,7 @@ struct LinkView: View {
         HStack {
             Image(item.image)
                 .resizable()
-                .aspectRatio(contentMode: .fill)
+                .aspectRatio(contentMode: .fit)
                 .frame(width: 60, height: 80)
                 .cornerRadius(8)
                 .clipped()
@@ -27,11 +27,13 @@ struct LinkView: View {
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .lineLimit(1)
+                
+                Text(item.status.rawValue)
+                    .font(.caption)
+                    .foregroundColor(.blue)
             }
             
             Spacer()
-            
-            
         }
         .padding(.vertical, 4)
     }
