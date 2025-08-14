@@ -4,7 +4,6 @@
 //
 //  Created by Roy Dimapilis on 8/6/25.
 //
-
 import SwiftUI
 
 struct BookDetailView: View {
@@ -33,24 +32,21 @@ struct BookDetailView: View {
                         .font(.title2)
                         .foregroundColor(.secondary)
                     
+                    // Star Rating moved here
+                    HStack {
+                        ForEach(1...5, id: \.self) { star in
+                            Image(systemName: star <= book.rating ? "star.fill" : "star")
+                                .foregroundColor(.yellow)
+                        }
+                        Spacer()
+                    }
+                    .accessibilityLabel("\(book.rating) out of 5 stars")
+                    
                     Text(book.description)
                         .font(.body)
                         .foregroundColor(.secondary)
                     
                     VStack {
-                        HStack {
-                            Spacer()
-                            
-                            ForEach(1...5, id: \.self) { star in
-                                Image(systemName: star <= book.rating ? "star.fill" : "star")
-                                    .foregroundColor(.yellow)
-                            }
-                            
-                            Spacer()
-                        }
-                        .accessibilityLabel("\(book.rating) out of 5 stars")
-                        .padding()
-                        
                         Text(book.status.rawValue)
                             .font(.caption)
                             .fontWeight(.bold)
@@ -58,6 +54,7 @@ struct BookDetailView: View {
                             .background(Color.accentColor.opacity(0.2))
                             .clipShape(Capsule())
                     }
+                    
                     Button("Mark as Read") {
                         book.status = .finished
                         print("Button tapped for \(book.title)")
@@ -80,7 +77,7 @@ struct BookDetailView: View {
           }
         }
         .sheet(isPresented: $showingEditSheet) {
-            EditView(book: $book) 
+            EditView(book: $book)
         }
     }
 }
