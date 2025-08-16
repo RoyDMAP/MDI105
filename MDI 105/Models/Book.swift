@@ -15,6 +15,7 @@ struct Book: Identifiable {
     var description: String
     var rating: Int // Double VS Int
     var review: String
+    var isFavorite: Bool = false
     var status: BookStatus
     
 }

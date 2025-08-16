@@ -12,8 +12,7 @@ struct BookDetailView: View {
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.green.opacity(0.1), .white.opacity(0.3)]), startPoint: .top, endPoint: .bottom
-                )
+            LinearGradient(gradient: Gradient(colors: [.green.opacity(0.1), .white.opacity(0.3)]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
             ScrollView {
@@ -23,6 +22,7 @@ struct BookDetailView: View {
                         .scaledToFit()
                         .frame(height: 250)
                         .cornerRadius(10)
+                        .accessibilityLabel("\(book.title) cover image")
                     
                     Text(book.title)
                         .font(.title)
@@ -32,15 +32,17 @@ struct BookDetailView: View {
                         .font(.title2)
                         .foregroundColor(.secondary)
                     
-                    // Star Rating moved here
+                    // Star Rating and Heart Button
                     HStack {
                         ForEach(1...5, id: \.self) { star in
                             Image(systemName: star <= book.rating ? "star.fill" : "star")
                                 .foregroundColor(.yellow)
                         }
                         Spacer()
+                        
+                        FavoriteToggle(isFavorite: $book.isFavorite)
                     }
-                    .accessibilityLabel("\(book.rating) out of 5 stars")
+                    .accessibilityLabel("\(book.rating) out of 5 stars. \(book.isFavorite ? "Favorited" : "Not favorited")")
                     
                     Text(book.description)
                         .font(.body)
@@ -57,7 +59,6 @@ struct BookDetailView: View {
                     
                     Button("Mark as Read") {
                         book.status = .finished
-                        print("Button tapped for \(book.title)")
                     }
                     .buttonStyle(.borderedProminent)
                     .frame(maxWidth: .infinity)
@@ -72,16 +73,16 @@ struct BookDetailView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button("Edit") {
-                showingEditSheet = true
+                    showingEditSheet = true
+                }
             }
-          }
         }
         .sheet(isPresented: $showingEditSheet) {
             EditView(book: $book)
         }
     }
 }
+
 #Preview {
     ContentView()
-    
 }

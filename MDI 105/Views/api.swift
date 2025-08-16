@@ -17,6 +17,7 @@ func getBooks() -> [Book] {
             description: "The first volume of The Lord of the Rings tells of the fateful power of the One Ring. It begins a magnificent tale of adventure that will plunge the members of the Fellowship of the Ring into a perilous quest and set the stage for the ultimate clash between the powers of good and evil.",
             rating: 4,
             review: "This is a great book",
+            isFavorite: false,
             status: .finished
         ),
         Book(
@@ -26,6 +27,7 @@ func getBooks() -> [Book] {
             description: "The second volume in The Lord of the Rings tells of the Fellowship's adventures as they continue their quest to destroy the Ring and defeat the Dark Lord Sauron. Frodo and Sam continue towards Mordor to destroy the Ring, unaware of the tragedy that has befallen their companions.",
             rating: 5,
             review: "Amazing book",
+            isFavorite: false,
             status: .finished
         ),
         Book(
@@ -35,6 +37,7 @@ func getBooks() -> [Book] {
             description: "The final volume of The Lord of the Rings, tells of the opposing strategies of the wizard Gandalf and the Dark Lord Sauron, the final battle, and the ending of the War of the Ring in the Battle of the Pelennor Fields and at the Black Gate.",
             rating: 5,
             review: "This is the best book",
+            isFavorite: false,
             status: .finished
         )
     ]
