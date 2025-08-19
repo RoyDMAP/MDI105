@@ -12,7 +12,6 @@ struct SquareCardView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            
             if !book.image.isEmpty {
                 Image(book.image)
                     .resizable()
@@ -33,7 +32,6 @@ struct SquareCardView: View {
                     .cornerRadius(8)
             }
             
-            // Book title
             Text(book.title)
                 .font(.headline)
                 .fontWeight(.medium)
@@ -41,25 +39,26 @@ struct SquareCardView: View {
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.primary)
             
-            // Book author
             Text(book.author)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .lineLimit(1)
             
-            // Status and favorite indicator
             HStack {
-                Text(book.status.rawValue)
-                    .font(.caption)
-                    .foregroundColor(.blue)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background(Color.blue.opacity(0.1))
-                    .cornerRadius(4)
+                VStack(alignment: .leading, spacing: 2) {
+                    CapsuleView(text: book.genre.rawValue, color: .cyan)
+                    
+                    Text(book.status.rawValue)
+                        .font(.caption)
+                        .foregroundColor(.blue)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(Color.blue.opacity(0.1))
+                        .cornerRadius(4)
+                }
                 
                 Spacer()
                 
-                // Only show heart if favorite
                 if book.isFavorite {
                     Image(systemName: "heart.fill")
                         .foregroundColor(.red)
@@ -83,7 +82,8 @@ struct SquareCardView: View {
         rating: 4,
         review: "Great book!",
         isFavorite: true,
-        status: .finished 
+        status: .finished,
+        genre: .fantasy
     ))
     .frame(width: 180)
     .padding()

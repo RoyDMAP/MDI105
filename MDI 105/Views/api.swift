@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-func getBooks() -> [Book] {
+func getDefaultBooks() -> [Book] {
     return [
         Book(
             title: "The Fellowship of the Ring",
@@ -18,7 +18,8 @@ func getBooks() -> [Book] {
             rating: 4,
             review: "This is a great book",
             isFavorite: false,
-            status: .finished
+            status: .notStarted,
+            genre: .classic
         ),
         Book(
             title: "The Two Towers",
@@ -27,8 +28,20 @@ func getBooks() -> [Book] {
             description: "The second volume in The Lord of the Rings tells of the Fellowship's adventures as they continue their quest to destroy the Ring and defeat the Dark Lord Sauron. Frodo and Sam continue towards Mordor to destroy the Ring, unaware of the tragedy that has befallen their companions.",
             rating: 5,
             review: "Amazing book",
+            isFavorite: true,
+            status: .finished,
+            genre: .fantasy
+        ),
+        Book(
+            title: "The Art of the Hobbit",
+            author: "J.R.R. Tolkien",
+            image: "Pic4",
+            description: "This includes over one hundred sketches, drawings, paintings, maps, and plans, many of which were preliminary or experimental versions and are published here for the first time, some in color. The book offers a unique look into Tolkien's creative process and how he visualized the world of The Hobbit.",
+            rating: 5,
+            review: "Amazing book",
             isFavorite: false,
-            status: .finished
+            status: .notStarted,
+            genre: .terror
         ),
         Book(
             title: "The Return of the King",
@@ -37,8 +50,9 @@ func getBooks() -> [Book] {
             description: "The final volume of The Lord of the Rings, tells of the opposing strategies of the wizard Gandalf and the Dark Lord Sauron, the final battle, and the ending of the War of the Ring in the Battle of the Pelennor Fields and at the Black Gate.",
             rating: 5,
             review: "This is the best book",
-            isFavorite: false,
-            status: .finished
+            isFavorite: true,
+            status: .finished,
+            genre: .dystopian
         )
     ]
 }

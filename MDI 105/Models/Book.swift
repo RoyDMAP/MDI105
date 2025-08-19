@@ -17,5 +17,7 @@ struct Book: Identifiable {
     var review: String
     var isFavorite: Bool = false
     var status: BookStatus
+    var genre: Genre
+   
     
 }

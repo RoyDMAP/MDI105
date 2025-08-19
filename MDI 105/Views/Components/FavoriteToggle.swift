@@ -26,9 +26,9 @@ struct FavoriteToggle: View {
             Image(systemName: "heart.fill")
                 .foregroundColor(.red)
                 .font(.largeTitle)
-                .opacity(opacity)  // Use the state variable
-                .scaleEffect(scale)  // Use the state variable
-                .offset(y: offsetY)  // Use the state variable
+                .opacity(opacity)
+                .scaleEffect(scale)
+                .offset(y: offsetY)
             
             Toggle(isOn: $isFavorite) {
                 Image(systemName: isFavorite ? "heart.fill" : "heart")

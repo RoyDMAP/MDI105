@@ -8,61 +8,25 @@ import SwiftUI
 
 struct BookDetailView: View {
     @Binding var book: Book
+    @Binding var books: [Book]  // ADDED: Access to books array for deletion
     @State private var showingEditSheet = false
+    @State private var showingDeleteAlert = false  // ADDED: Delete confirmation alert
+    @Environment(\.dismiss) private var dismiss  // ADDED: To dismiss view after deletion
     
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [.green.opacity(0.1), .white.opacity(0.3)]), startPoint: .top, endPoint: .bottom)
-                .ignoresSafeArea()
+            backgroundGradient
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
-                    Image(book.image)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height: 250)
-                        .cornerRadius(10)
-                        .accessibilityLabel("\(book.title) cover image")
-                    
-                    Text(book.title)
-                        .font(.title)
-                        .fontWeight(.bold)
-                    
-                    Text("by \(book.author)")
-                        .font(.title2)
-                        .foregroundColor(.secondary)
-                    
-                    // Star Rating and Heart Button
-                    HStack {
-                        ForEach(1...5, id: \.self) { star in
-                            Image(systemName: star <= book.rating ? "star.fill" : "star")
-                                .foregroundColor(.yellow)
-                        }
-                        Spacer()
-                        
-                        FavoriteToggle(isFavorite: $book.isFavorite)
-                    }
-                    .accessibilityLabel("\(book.rating) out of 5 stars. \(book.isFavorite ? "Favorited" : "Not favorited")")
-                    
-                    Text(book.description)
-                        .font(.body)
-                        .foregroundColor(.secondary)
-                    
-                    VStack {
-                        Text(book.status.rawValue)
-                            .font(.caption)
-                            .fontWeight(.bold)
-                            .padding(8)
-                            .background(Color.accentColor.opacity(0.2))
-                            .clipShape(Capsule())
-                    }
-                    
-                    Button("Mark as Read") {
-                        book.status = .finished
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .frame(maxWidth: .infinity)
-                    
+                    bookCoverSection
+                    bookInfoSection
+                    ratingAndFavoriteSection
+                    genreAndStatusSection
+                    descriptionSection
+                    reviewSection
+                    actionButtonsSection
+                    deleteButtonSection  // ADDED: Delete button section
                     Spacer()
                 }
                 .padding()
@@ -71,18 +35,206 @@ struct BookDetailView: View {
         .navigationTitle(book.title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) {
-                Button("Edit") {
-                    showingEditSheet = true
+            ToolbarItem(placement: .navigationBarTrailing) {
+                HStack {
+                    Button("Edit") {
+                        showingEditSheet = true
+                    }
+                    
+                    Button(action: {
+                        showingDeleteAlert = true
+                    }) {
+                        Image(systemName: "trash")
+                            .foregroundColor(.red)
+                    }
                 }
             }
         }
         .sheet(isPresented: $showingEditSheet) {
-            EditView(book: $book)
+            EditBookView(book: $book)
         }
+        .alert("Delete Book", isPresented: $showingDeleteAlert) {  // ADDED: Delete confirmation alert
+            Button("Cancel", role: .cancel) { }
+            Button("Delete", role: .destructive) {
+                deleteBook()
+            }
+        } message: {
+            Text("Are you sure you want to delete \"\(book.title)\"? This action cannot be undone.")
+        }
+    }
+    
+    // MARK: - View Components
+    
+    private var backgroundGradient: some View {
+        LinearGradient(
+            gradient: Gradient(colors: [.green.opacity(0.1), .white.opacity(0.3)]),
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .ignoresSafeArea()
+    }
+    
+    private var bookCoverSection: some View {
+        Group {
+            if !book.image.isEmpty {
+                Image(book.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 250)
+                    .cornerRadius(10)
+                    .accessibilityLabel("\(book.title) cover image")
+            } else {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.gray.opacity(0.2))
+                    .frame(height: 250)
+                    .overlay(
+                        Image(systemName: "book.closed")
+                            .font(.system(size: 60))
+                            .foregroundColor(.gray)
+                    )
+            }
+        }
+    }
+    
+    private var bookInfoSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(book.title)
+                .font(.title)
+                .fontWeight(.bold)
+            
+            Text("by \(book.author)")
+                .font(.title2)
+                .foregroundColor(.secondary)
+        }
+    }
+    
+    private var ratingAndFavoriteSection: some View {
+        HStack {
+            // UPDATED: Display-only rating stars (not interactive)
+            ForEach(1...5, id: \.self) { star in
+                Image(systemName: star <= book.rating ? "star.fill" : "star")
+                    .foregroundColor(.yellow)
+                    .font(.title3)
+            }
+            Text("(\(book.rating)/5)")
+                .foregroundColor(.secondary)
+            
+            Spacer()
+            
+            Button(action: {
+                book.isFavorite.toggle()
+            }) {
+                Image(systemName: book.isFavorite ? "heart.fill" : "heart")
+                    .foregroundColor(book.isFavorite ? .red : .gray)
+                    .font(.title2)
+            }
+        }
+        .accessibilityLabel("\(book.rating) out of 5 stars. \(book.isFavorite ? "Favorited" : "Not favorited")")
+    }
+    
+    private var genreAndStatusSection: some View {
+        HStack {
+            CapsuleView(text: book.genre.rawValue, color: .cyan)  // Changed to light blue
+            CapsuleView(text: book.status.rawValue, color: .blue)
+            Spacer()
+        }
+    }
+    
+    private var descriptionSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Description")
+                .font(.headline)
+                .padding(.top)
+            
+            Text(book.description)
+                .font(.body)
+                .foregroundColor(.primary)
+        }
+    }
+    
+    @ViewBuilder
+    private var reviewSection: some View {
+        if !book.review.isEmpty {
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Review")
+                    .font(.headline)
+                    .padding(.top)
+                
+                Text(book.review)
+                    .font(.body)
+                    .foregroundColor(.primary)
+                    .italic()
+            }
+        }
+    }
+    
+    private var actionButtonsSection: some View {
+        VStack(spacing: 12) {
+            if book.status != .finished {
+                Button("Mark as Read") {
+                    book.status = .finished
+                }
+                .buttonStyle(.borderedProminent)
+                .frame(maxWidth: .infinity)
+            }
+            
+            if book.status != .reading && book.status != .finished {
+                Button("Start Reading") {
+                    book.status = .reading
+                }
+                .buttonStyle(.bordered)
+                .frame(maxWidth: .infinity)
+            }
+            
+            if book.status == .finished || book.status == .reading {
+                Button("Want to Re-read") {
+                    book.status = .notStarted
+                }
+                .buttonStyle(.bordered)
+                .frame(maxWidth: .infinity)
+            }
+        }
+        .padding(.top)
+    }
+    
+    // ADDED: Delete button section
+    private var deleteButtonSection: some View {
+        Button(action: {
+            showingDeleteAlert = true
+        }) {
+            HStack {
+                Image(systemName: "trash")
+                Text("Delete Book")
+            }
+            .foregroundColor(.red)
+            .frame(maxWidth: .infinity)
+            .padding()
+            .background(Color.red.opacity(0.1))
+            .cornerRadius(12)
+        }
+        .padding(.top)
+    }
+    
+    // ADDED: Delete function
+    private func deleteBook() {
+        books.removeAll { $0.id == book.id }
+        dismiss()
     }
 }
 
 #Preview {
-    ContentView()
+    BookDetailView(
+        book: .constant(Book(
+            title: "Sample Book",
+            author: "Sample Author",
+            image: "Pic1",
+            description: "A sample book for preview with a longer description to show how it looks when there's more text to display.",
+            rating: 4,
+            review: "Great book! Really enjoyed reading it.",
+            isFavorite: true,
+            status: .finished,
+            genre: .fantasy
+        )),
+        books: .constant([])  
+    )
 }

@@ -9,132 +9,145 @@ import SwiftUI
 
 struct BookListView: View {
     @Binding var books: [Book]
-    @State private var showingAddSheet = false
-    
-    // Add book form states
-    @State private var newTitle = ""
-    @State private var newAuthor = ""
-    @State private var newDescription = ""
-    @State private var newImage = "book"
-    @State private var newRating = 3
-    @State private var newReview = ""
-    @State private var newStatus: BookStatus = .notStarted
+    @Binding var selectedGenre: Genre?
+    let filteredBooks: [Book]
+    @Binding var showingAddBook: Bool
+    @State private var showingGenreFilter = false
     
     var body: some View {
-        NavigationView {
-            List(books) { currentItem in
-                NavigationLink(destination: BookDetailView(book: binding(for: currentItem))) {
-                    LinkView(item: currentItem)
+        NavigationStack {
+            List {
+                ForEach(filteredBooks) { book in
+                    NavigationLink(destination: BookDetailView(
+                        book: bindingForBook(book),
+                        books: $books
+                    )) {
+                        BookRowView(book: book)
+                    }
                 }
+                .onDelete(perform: deleteBooks)
             }
-            .navigationTitle("My Books")
+            .navigationTitle(navigationTitle)
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
-                        resetAddForm()
-                        showingAddSheet = true
+                        showingGenreFilter = true
                     }) {
-                        Image(systemName: "plus")
-                            .font(.title2)
-                            .fontWeight(.bold)
-                            .foregroundColor(.white)
-                            .frame(width: 32, height: 32)
-                            .background(Color.accentColor)
-                            .clipShape(Circle())
+                        HStack {
+                            Image(systemName: "line.3.horizontal.decrease.circle")
+                            Text("Filter")
+                        }
                     }
-                    .padding(.trailing, 8)
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button(action: {
+                        showingAddBook = true
+                    }) {
+                        HStack {
+                            Image(systemName: "plus.circle.fill")
+                            Text("Add Book")
+                        }
+                    }
                 }
             }
-        }
-        .sheet(isPresented: $showingAddSheet) {
-            NavigationView {
-                Form {
-                    Section("Book Details") {
-                        TextField("Title", text: $newTitle)
-                        TextField("Author", text: $newAuthor)
-                        TextField("Description", text: $newDescription, axis: .vertical)
-                            .lineLimit(3...6)
-                    }
-                    
-                    Section("Image") {
-                        TextField("Image Name", text: $newImage)
-                        Text("Use SF Symbol names like 'book', 'book.fill', etc.")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                    }
-                    
-                    Section("Rating") {
-                        StarRatingView(rating: $newRating)
-                    }
-                    
-                    Section("Review") {
-                        TextField("Your review", text: $newReview, axis: .vertical)
-                            .lineLimit(2...4)
-                    }
-                    
-                    Section("Status") {
-                        Picker("Reading Status", selection: $newStatus) {
-                            ForEach(BookStatus.allCases, id: \.self) { status in
-                                Text(status.rawValue).tag(status)
-                            }
-                        }
-                        .pickerStyle(.segmented)
-                    }
-                }
-                .navigationTitle("Add New Book")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
-                            showingAddSheet = false
-                        }
-                    }
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button("Save") {
-                            addNewBook()
-                            showingAddSheet = false
-                        }
-                        .disabled(newTitle.isEmpty && newAuthor.isEmpty)
-                    }
-                }
+            .sheet(isPresented: $showingGenreFilter) {
+                GenreFilterView(
+                    books: books,
+                    selectedGenre: $selectedGenre
+                )
             }
         }
     }
     
-    private func binding(for book: Book) -> Binding<Book> {
+    private var navigationTitle: String {
+        if let selectedGenre = selectedGenre {
+            return selectedGenre.rawValue
+        }
+        return "My Books"
+    }
+    
+    private func bindingForBook(_ book: Book) -> Binding<Book> {
         guard let index = books.firstIndex(where: { $0.id == book.id }) else {
-            fatalError("Book not found")
+            return .constant(book)
         }
         return $books[index]
     }
     
-    private func addNewBook() {
-        let newBook = Book(
-            title: newTitle.isEmpty ? "Untitled Book" : newTitle,
-            author: newAuthor.isEmpty ? "Unknown Author" : newAuthor,
-            image: newImage.isEmpty ? "book" : newImage,
-            description: newDescription.isEmpty ? "No description available." : newDescription,
-            rating: newRating,
-            review: newReview.isEmpty ? "No review yet." : newReview,
-            isFavorite: false,
-            status: newStatus
-        )
-        books.append(newBook)
-        print("Added new book: \(newBook.title)")
+    func deleteBooks(at offsets: IndexSet) {
+        let booksToDelete = offsets.map { filteredBooks[$0] }
+        for bookToDelete in booksToDelete {
+            books.removeAll { $0.id == bookToDelete.id }
+        }
+    }
+}
+
+struct BookRowView: View {
+    let book: Book
+    
+    var body: some View {
+        HStack {
+            bookCoverView
+            bookInfoView
+            Spacer()
+            favoriteIndicator
+        }
+        .padding(.vertical, 4)
     }
     
-    private func resetAddForm() {
-        newTitle = ""
-        newAuthor = ""
-        newDescription = ""
-        newImage = "book"
-        newRating = 3
-        newReview = ""
-        newStatus = .notStarted
+    @ViewBuilder
+    private var bookCoverView: some View {
+        if !book.image.isEmpty {
+            Image(book.image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 40, height: 60)
+                .cornerRadius(4)
+        } else {
+            RoundedRectangle(cornerRadius: 4)
+                .fill(Color.gray.opacity(0.2))
+                .frame(width: 40, height: 60)
+                .overlay(
+                    Image(systemName: "book.closed")
+                        .foregroundColor(.gray)
+                        .font(.caption)
+                )
+        }
+    }
+    
+    private var bookInfoView: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(book.title)
+                .font(.headline)
+                .foregroundColor(.primary)
+                .lineLimit(2)
+            
+            Text(book.author)
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+            
+            HStack {
+                CapsuleView(text: book.genre.rawValue, color: .cyan)
+                CapsuleView(text: book.status.rawValue, color: .blue)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private var favoriteIndicator: some View {
+        if book.isFavorite {
+            Image(systemName: "heart.fill")
+                .foregroundColor(.red)
+        }
     }
 }
 
 #Preview {
-    BookListView(books: .constant([]))
+    BookListView(
+        books: .constant(getDefaultBooks()),
+        selectedGenre: .constant(nil),
+        filteredBooks: getDefaultBooks(),
+        showingAddBook: .constant(false)
+    )
 }

@@ -43,7 +43,10 @@ struct FavoritesView: View {
                 ScrollView {
                     LazyVGrid(columns: gridLayout, spacing: 16) {
                         ForEach(favoriteBooks) { book in
-                            NavigationLink(destination: BookDetailView(book: binding(for: book))) {
+                            NavigationLink(destination: BookDetailView(
+                                book: binding(for: book),
+                                books: $books  
+                            )) {
                                 SquareCardView(book: book)
                             }
                             .buttonStyle(PlainButtonStyle())
@@ -52,7 +55,7 @@ struct FavoritesView: View {
                     .padding(.horizontal)
                 }
                 .navigationTitle("Favorite Books")
-                .navigationBarTitleDisplayMode(.large) 
+                .navigationBarTitleDisplayMode(.large)
             }
         }
     }
@@ -65,5 +68,18 @@ struct FavoritesView: View {
     }
 }
 
-
-
+#Preview {
+    FavoritesView(books: .constant([
+        Book(
+            title: "Sample Book",
+            author: "Sample Author",
+            image: "Pic1",
+            description: "A sample book description",
+            rating: 4,
+            review: "Great book!",
+            isFavorite: true,
+            status: .finished,
+            genre: .fantasy
+        )
+    ]))
+}
