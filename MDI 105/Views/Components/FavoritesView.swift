@@ -14,6 +14,10 @@ struct FavoritesView: View {
         books.filter { $0.isFavorite }
     }
     
+    let gridLayout = [
+        GridItem(.adaptive(minimum: 150))
+    ]
+    
     var body: some View {
         NavigationStack {
             if favoriteBooks.isEmpty {
@@ -36,13 +40,19 @@ struct FavoritesView: View {
                 .navigationTitle("Favorites")
                 .navigationBarTitleDisplayMode(.large)
             } else {
-                List(favoriteBooks) { book in
-                    NavigationLink(destination: BookDetailView(book: binding(for: book))) {
-                        LinkView(item: book)
+                ScrollView {
+                    LazyVGrid(columns: gridLayout, spacing: 16) {
+                        ForEach(favoriteBooks) { book in
+                            NavigationLink(destination: BookDetailView(book: binding(for: book))) {
+                                SquareCardView(book: book)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
                     }
+                    .padding(.horizontal)
                 }
-                .navigationTitle("Favorites")
-                .navigationBarTitleDisplayMode(.large)
+                .navigationTitle("Favorite Books")
+                .navigationBarTitleDisplayMode(.large) 
             }
         }
     }
@@ -55,6 +65,5 @@ struct FavoritesView: View {
     }
 }
 
-#Preview {
-    FavoritesView(books: .constant([]))
-}
+
+

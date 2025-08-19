@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FavoriteToggle: View {  // Removed 'public' for simplicity
+struct FavoriteToggle: View {  
     
     @Binding var isFavorite: Bool
     
