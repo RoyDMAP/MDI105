@@ -35,7 +35,6 @@ struct SettingView: View {
                                 Text(theme.displayName)
                                     .tag(theme)
                         }
-                        ColorPicker("color", selection: $appAccentColor)
                     }
                     .pickerStyle(.segmented)
                 }

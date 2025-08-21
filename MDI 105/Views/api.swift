@@ -33,6 +33,28 @@ func getDefaultBooks() -> [Book] {
             genre: .fantasy
         ),
         Book(
+            title: "Moby Dick",
+            author: "Herman Melville",
+            image: "Pic5",
+            description: "TA young seaman joins the crew of the fanatical Captain Ahab in pursuit of the white whale Moby Dick",
+            rating: 4,
+            review: "Amazing book",
+            isFavorite: false,
+            status: .notStarted,
+            genre: .classic
+        ),
+        Book(
+            title: "Gulliver's travels",
+            author: "Jonathan Swift",
+            image: "Pic6",
+            description: "An Englishman becomes shipwrecked in various lands on four different voyages",
+            rating: 4,
+            review: "A must read",
+            isFavorite: false,
+            status: .notStarted,
+            genre: .classic
+        ),
+        Book(
             title: "The Art of the Hobbit",
             author: "J.R.R. Tolkien",
             image: "Pic4",
@@ -42,6 +64,28 @@ func getDefaultBooks() -> [Book] {
             isFavorite: false,
             status: .notStarted,
             genre: .terror
+        ),
+        Book(
+            title: "Final fantasy VII remake: traces of two pasts",
+            author: "Kazushige Nojima",
+            image: "Pic7",
+            description: "This novel in two parts delves into the pasts of Aerith Gainsborough and Tifa Lockhart, the beloved heroines of Final Fantasy VII.",
+            rating: 5,
+            review: "Amazing book",
+            isFavorite: false,
+            status: .notStarted,
+            genre: .fantasy
+        ),
+        Book(
+            title: "Sleeping beauties : a graphic novel",
+            author: "Stephen King",
+            image: "Pic8",
+            description: "A bizarre sleeping sickness, called Aurora, has fallen over the world. Its victims can't wake up. And all of them are women. As nations fall into chaos, those women still awake take desperate measures to stay that way, and men everywhere begin to give in to their darkest impulses. Meanwhile, in the small town of Dooling, a mysterious woman has walked out of the woods; she calls herself Eve and leaves a trail of carnage in her wake. Strangest of all, she's the only woman who can wake up.",
+            rating: 5,
+            review: "Twist and turns",
+            isFavorite: false,
+            status: .notStarted,
+            genre: .dystopian
         ),
         Book(
             title: "The Return of the King",

@@ -10,6 +10,7 @@ struct ContentView: View {
     @State private var books: [Book] = []
     @State private var selectedGenre: Genre? = nil
     @State private var showingAddBook = false
+    @State private var searchText = ""
     @AppStorage(SETTINGS_THEME_KEY) private var theme: Theme = .system
     @AppStorage("appAccentColor") private var appAccentColor: Color = .blue
     
@@ -24,12 +25,26 @@ struct ContentView: View {
         }
     }
     
-    // Filtered books
-    var filteredBooks: [Book] {
-        if let selectedGenre = selectedGenre {
-            return books.filter { $0.genre == selectedGenre }
+    // Search and filter books
+    var searchedBooks: [Book] {
+        if searchText.isEmpty {
+            return books
+        } else {
+            return books.filter { book in
+                book.title.localizedCaseInsensitiveContains(searchText) ||
+                book.author.localizedCaseInsensitiveContains(searchText) ||
+                book.genre.rawValue.localizedCaseInsensitiveContains(searchText)
+            }
         }
-        return books
+    }
+    
+    var filteredBooks: [Book] {
+        let searchFiltered = searchedBooks
+        
+        if let selectedGenre = selectedGenre {
+            return searchFiltered.filter { $0.genre == selectedGenre }
+        }
+        return searchFiltered
     }
     
     var body: some View {
@@ -54,6 +69,7 @@ struct ContentView: View {
                     Label("Settings", systemImage: "gearshape")
                 }
         }
+        .searchable(text: $searchText, prompt: "Search books by title, author, or genre...")
         .preferredColorScheme(colorScheme)
         .tint(appAccentColor)
         .onAppear {
@@ -63,13 +79,11 @@ struct ContentView: View {
             AddBookView(books: $books)
         }
     }
-    
     private func loadBooksIfNeeded() {
         if books.isEmpty {
             books = getDefaultBooks()
         }
     }
-    
     func addBook(_ book: Book) {
         books.append(book)
     }
@@ -106,6 +120,14 @@ struct ContentView: View {
         if let index = books.firstIndex(where: { $0.id == bookId }) {
             books[index].rating = rating
         }
+    }
+    //clear search
+    func clearSearch() {
+        searchText = ""
+    }
+    
+    func hasSearchResults() -> Bool {
+        return !filteredBooks.isEmpty || searchText.isEmpty
     }
     
     func getBooksCount() -> Int {
