@@ -26,7 +26,7 @@ struct BookDetailView: View {
                     descriptionSection
                     reviewSection
                     actionButtonsSection
-                    deleteButtonSection  // ADDED: Delete button section
+                  
                     Spacer()
                 }
                 .padding()
@@ -53,7 +53,7 @@ struct BookDetailView: View {
         .sheet(isPresented: $showingEditSheet) {
             EditBookView(book: $book)
         }
-        .alert("Delete Book", isPresented: $showingDeleteAlert) {  // ADDED: Delete confirmation alert
+        .alert("Delete Book", isPresented: $showingDeleteAlert) {
             Button("Cancel", role: .cancel) { }
             Button("Delete", role: .destructive) {
                 deleteBook()
@@ -62,8 +62,6 @@ struct BookDetailView: View {
             Text("Are you sure you want to delete \"\(book.title)\"? This action cannot be undone.")
         }
     }
-    
-    // MARK: - View Components
     
     private var backgroundGradient: some View {
         LinearGradient(
@@ -185,56 +183,17 @@ struct BookDetailView: View {
                 .buttonStyle(.bordered)
                 .frame(maxWidth: .infinity)
             }
-            
-            if book.status == .finished || book.status == .reading {
-                Button("Want to Re-read") {
-                    book.status = .notStarted
-                }
-                .buttonStyle(.bordered)
-                .frame(maxWidth: .infinity)
-            }
         }
         .padding(.top)
     }
     
-    // ADDED: Delete button section
-    private var deleteButtonSection: some View {
-        Button(action: {
-            showingDeleteAlert = true
-        }) {
-            HStack {
-                Image(systemName: "trash")
-                Text("Delete Book")
-            }
-            .foregroundColor(.red)
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(Color.red.opacity(0.1))
-            .cornerRadius(12)
-        }
-        .padding(.top)
-    }
     
-    // ADDED: Delete function
+    
+    // Delete function
     private func deleteBook() {
         books.removeAll { $0.id == book.id }
         dismiss()
     }
 }
 
-#Preview {
-    BookDetailView(
-        book: .constant(Book(
-            title: "Sample Book",
-            author: "Sample Author",
-            image: "Pic1",
-            description: "A sample book for preview with a longer description to show how it looks when there's more text to display.",
-            rating: 4,
-            review: "Great book! Really enjoyed reading it.",
-            isFavorite: true,
-            status: .finished,
-            genre: .fantasy
-        )),
-        books: .constant([])  
-    )
-}
+

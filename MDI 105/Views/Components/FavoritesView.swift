@@ -9,14 +9,16 @@ import SwiftUI
 
 struct FavoritesView: View {
     @Binding var books: [Book]
+    @AppStorage(GRID_COLUMN_NUMBER_KEY) private var gridColumnNumber: Int = 2
+    
+    // Grid layout
+    private var gridLayout: [GridItem] {
+        Array(repeating: GridItem(.flexible()), count: gridColumnNumber)
+    }
     
     var favoriteBooks: [Book] {
         books.filter { $0.isFavorite }
     }
-    
-    let gridLayout = [
-        GridItem(.adaptive(minimum: 150))
-    ]
     
     var body: some View {
         NavigationStack {

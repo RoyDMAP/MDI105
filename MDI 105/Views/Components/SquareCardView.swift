@@ -12,7 +12,7 @@ struct SquareCardView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            // Book cover image - fixed size
+            
             if !book.image.isEmpty {
                 Image(book.image)
                     .resizable()
@@ -21,7 +21,7 @@ struct SquareCardView: View {
                     .clipped()
                     .cornerRadius(8)
             } else {
-                // Fallback placeholder if no image
+                // placeholder if no image
                 RoundedRectangle(cornerRadius: 8)
                     .fill(Color.gray.opacity(0.2))
                     .frame(width: 100, height: 100)
@@ -33,7 +33,6 @@ struct SquareCardView: View {
                     .cornerRadius(8)
             }
             
-            // Book title - fixed height
             Text(book.title)
                 .font(.headline)
                 .fontWeight(.medium)
@@ -42,14 +41,13 @@ struct SquareCardView: View {
                 .foregroundColor(.primary)
                 .frame(height: 44, alignment: .top)  // Fixed height for 2 lines
             
-            // Book author - fixed height
             Text(book.author)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .lineLimit(1)
                 .frame(height: 20, alignment: .top)  // Fixed height for 1 line
             
-            // Bottom section - fixed height
+            // Bottom section
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
                     CapsuleView(text: book.genre.rawValue, color: .cyan)
@@ -73,9 +71,9 @@ struct SquareCardView: View {
             }
             .frame(height: 40, alignment: .top)  // Fixed height for badges section
             
-            Spacer(minLength: 0)  // Push content to top
+            Spacer(minLength: 0)
         }
-        .frame(width: 140, height: 220)  // Fixed card dimensions
+        .frame(width: 140, height: 220)  // Card dimension
         .padding(12)
         .background(Color(.systemBackground))
         .cornerRadius(12)

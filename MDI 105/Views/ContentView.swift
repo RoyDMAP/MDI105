@@ -10,8 +10,21 @@ struct ContentView: View {
     @State private var books: [Book] = []
     @State private var selectedGenre: Genre? = nil
     @State private var showingAddBook = false
+    @AppStorage(SETTINGS_THEME_KEY) private var theme: Theme = .system
+    @AppStorage("appAccentColor") private var appAccentColor: Color = .blue
     
-    // Filtered books based on selected genre
+    var colorScheme: ColorScheme? {
+        switch theme {
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        case .system:
+            return nil
+        }
+    }
+    
+    // Filtered books
     var filteredBooks: [Book] {
         if let selectedGenre = selectedGenre {
             return books.filter { $0.genre == selectedGenre }
@@ -28,29 +41,38 @@ struct ContentView: View {
                 showingAddBook: $showingAddBook
             )
             .tabItem {
-                Label("My books", systemImage: "books.vertical.fill")
+                Label("My Books", systemImage: "books.vertical.fill")
             }
             
             FavoritesView(books: $books)
                 .tabItem {
                     Label("Favorites", systemImage: "heart.fill")
                 }
+            
+            SettingView()
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape")
+                }
         }
+        .preferredColorScheme(colorScheme)
+        .tint(appAccentColor)
         .onAppear {
-            if books.isEmpty {
-                books = getDefaultBooks()
-            }
+            loadBooksIfNeeded()
         }
         .sheet(isPresented: $showingAddBook) {
             AddBookView(books: $books)
         }
     }
     
+    private func loadBooksIfNeeded() {
+        if books.isEmpty {
+            books = getDefaultBooks()
+        }
+    }
     
     func addBook(_ book: Book) {
         books.append(book)
     }
-    
     
     func updateBook(_ updatedBook: Book) {
         if let index = books.firstIndex(where: { $0.id == updatedBook.id }) {
@@ -58,11 +80,60 @@ struct ContentView: View {
         }
     }
     
-   
     func deleteBook(at index: Int) {
         guard index >= 0 && index < filteredBooks.count else { return }
         let bookToDelete = filteredBooks[index]
         books.removeAll { $0.id == bookToDelete.id }
+    }
+    
+    func deleteBook(by id: UUID) {
+        books.removeAll { $0.id == id }
+    }
+    
+    func toggleFavorite(for bookId: UUID) {
+        if let index = books.firstIndex(where: { $0.id == bookId }) {
+            books[index].isFavorite.toggle()
+        }
+    }
+    
+    func updateBookStatus(_ bookId: UUID, status: BookStatus) {
+        if let index = books.firstIndex(where: { $0.id == bookId }) {
+            books[index].status = status
+        }
+    }
+    
+    func updateBookRating(_ bookId: UUID, rating: Int) {
+        if let index = books.firstIndex(where: { $0.id == bookId }) {
+            books[index].rating = rating
+        }
+    }
+    
+    func getBooksCount() -> Int {
+        return books.count
+    }
+    
+    func getFavoritesCount() -> Int {
+        return books.filter { $0.isFavorite }.count
+    }
+    
+    func getBooksByStatus(_ status: BookStatus) -> [Book] {
+        return books.filter { $0.status == status }
+    }
+    
+    func getBooksByGenre(_ genre: Genre) -> [Book] {
+        return books.filter { $0.genre == genre }
+    }
+    
+    func getCurrentlyReadingBooks() -> [Book] {
+        return getBooksByStatus(.reading)
+    }
+    
+    func getFinishedBooks() -> [Book] {
+        return getBooksByStatus(.finished)
+    }
+    
+    func getNotStartedBooks() -> [Book] {
+        return getBooksByStatus(.notStarted)
     }
 }
 
