@@ -13,10 +13,11 @@ struct CapsuleView: View {
     
     var body: some View {
         Text(text)
-            .font(.caption)
-            .fontWeight(.bold)
-            .padding(8)
+            .font(.caption2)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
             .background(color.opacity(0.2))
+            .foregroundColor(color)
             .clipShape(Capsule())
     }
 }

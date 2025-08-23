@@ -7,30 +7,30 @@
 
 import SwiftUI
 
-extension Color: RawRepresentable {
-    public init?(rawValue: String) {
-        guard let data = Data(base64Encoded: rawValue) else {
-            self = .black
-            return
-        }
-        
-        do {
-            if let color = try NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: data) {
-                self = Color(color)
-            } else {
-                self = .black
-            }
-        } catch {
-            self = .black
-        }
-    }
+enum AppColor: String, CaseIterable {
+    case blue = "blue"
+    case red = "red"
+    case green = "green"
+    case orange = "orange"
+    case purple = "purple"
+    case pink = "pink"
+    case cyan = "cyan"
+    case yellow = "yellow"
+    case indigo = "indigo"
+    case mint = "mint"
     
-    public var rawValue: String {
-        do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: UIColor(self), requiringSecureCoding: false)
-            return data.base64EncodedString()
-        } catch {
-            return ""
+    var color: Color {
+        switch self {
+        case .blue: return .blue
+        case .red: return .red
+        case .green: return .green
+        case .orange: return .orange
+        case .purple: return .purple
+        case .pink: return .pink
+        case .cyan: return .cyan
+        case .yellow: return .yellow
+        case .indigo: return .indigo
+        case .mint: return .mint
         }
     }
 }

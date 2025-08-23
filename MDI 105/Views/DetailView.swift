@@ -8,10 +8,10 @@ import SwiftUI
 
 struct BookDetailView: View {
     @Binding var book: Book
-    @Binding var books: [Book]  // ADDED: Access to books array for deletion
+    @Binding var books: [Book]
     @State private var showingEditSheet = false
-    @State private var showingDeleteAlert = false  // ADDED: Delete confirmation alert
-    @Environment(\.dismiss) private var dismiss  // ADDED: To dismiss view after deletion
+    @State private var showingDeleteAlert = false
+    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         ZStack {
@@ -186,8 +186,6 @@ struct BookDetailView: View {
         }
         .padding(.top)
     }
-    
-    
     
     // Delete function
     private func deleteBook() {

@@ -11,6 +11,7 @@ import SwiftUI
 
 enum BookStatus: String, CaseIterable {
     case notStarted = "Not Started"
-    case reading = "Currently Reading"
+    case reading = "Reading"
     case finished = "Finished"
+    case planToRead = "Plan to Read"
 }

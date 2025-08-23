@@ -39,13 +39,13 @@ struct SquareCardView: View {
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.primary)
-                .frame(height: 44, alignment: .top)  // Fixed height for 2 lines
+                .frame(height: 44, alignment: .top)  
             
             Text(book.author)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .lineLimit(1)
-                .frame(height: 20, alignment: .top)  // Fixed height for 1 line
+                .frame(height: 20, alignment: .top)
             
             // Bottom section
             HStack {
@@ -69,11 +69,11 @@ struct SquareCardView: View {
                         .font(.caption)
                 }
             }
-            .frame(height: 40, alignment: .top)  // Fixed height for badges section
+            .frame(height: 40, alignment: .top)
             
             Spacer(minLength: 0)
         }
-        .frame(width: 140, height: 220)  // Card dimension
+        .frame(width: 140, height: 220)
         .padding(12)
         .background(Color(.systemBackground))
         .cornerRadius(12)

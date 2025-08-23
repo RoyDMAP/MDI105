@@ -12,6 +12,7 @@ struct MDI_105App: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .preferredColorScheme(.light) // Optional: set default color scheme
         }
     }
 }

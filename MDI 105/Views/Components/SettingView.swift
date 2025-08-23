@@ -25,7 +25,11 @@ struct SettingView: View {
     @AppStorage(SETTINGS_THEME_KEY) private var theme: Theme = .system
     @AppStorage(GRID_COLUMN_NUMBER_KEY) private var gridColumnNumber: Int = 2
     @AppStorage(SETTINGS_GRID_SHOW_AUTHOR_KEY) private var gridShowAuthor: Bool = true
-    @AppStorage(SETTINGS_APP_ACCENT_COLOR_KEY) private var appAccentColor: Color = .blue
+    @AppStorage(SETTINGS_APP_ACCENT_COLOR_KEY) private var appAccentColorString: String = "blue"
+
+    private var appAccentColor: Color {
+        AppColor(rawValue: appAccentColorString)?.color ?? .blue
+    }
     var body: some View {
             NavigationStack {
                 Form {
