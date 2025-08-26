@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GenreFilterView: View {
     let books: [Book]
-    @Binding var selectedGenre: BookGenre?
+    @Binding var selectedGenre: Genre?
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -41,7 +41,7 @@ struct GenreFilterView: View {
     
     private var genresSection: some View {
         Section {
-            ForEach(BookGenre.allCases, id: \.self) { genre in
+            ForEach(Genre.allCases, id: \.self) { genre in
                 GenreRow(
                     genre: genre,
                     books: books,
@@ -92,7 +92,7 @@ struct AllBooksRow: View {
 }
 
 struct GenreRow: View {
-    let genre: BookGenre
+    let genre: Genre
     let books: [Book]
     let isSelected: Bool
     let action: () -> Void

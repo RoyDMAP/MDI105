@@ -8,18 +8,18 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var books: [Book] = []
-    @State private var selectedGenre: BookGenre? = nil
+    @State private var selectedGenre: Genre? = nil
     @State private var showingAddBook = false
     @State private var searchText = ""
     @State private var isLoading = false
     @State private var errorMessage: String?
     @State private var showingError = false
+    @State private var hasLoadedInitialData = false
     @AppStorage(SETTINGS_THEME_KEY) private var theme: Theme = .system
     @AppStorage("appAccentColor") private var appAccentColorString: String = "blue"
     
     private let booksKey = "SavedBooks"
     
-    // Convert string to Color
     private var appAccentColor: Color {
         AppColor(rawValue: appAccentColorString)?.color ?? AppColor.blue.color
     }
@@ -35,7 +35,6 @@ struct ContentView: View {
         }
     }
     
-    // Search and filter books
     var searchedBooks: [Book] {
         if searchText.isEmpty {
             return books
@@ -59,7 +58,6 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            // Books Tab
             NavigationStack {
                 BookListView(
                     books: $books,
@@ -71,8 +69,7 @@ struct ContentView: View {
             .tabItem {
                 Label("My Books", systemImage: "books.vertical.fill")
             }
-            
-            // Favorites Tab
+            //Favorites
             NavigationStack {
                 FavoritesView(books: $books)
             }
@@ -92,12 +89,14 @@ struct ContentView: View {
         .preferredColorScheme(colorScheme)
         .tint(appAccentColor)
         .onAppear {
-            loadBooks()
-        }
-        .onChange(of: books.count) { oldCount, newCount in
-            if oldCount != newCount {
-                saveBooks()
+            if !hasLoadedInitialData {
+                loadBooks()
+                
             }
+        }
+        .onChange(of: books) { oldBooks, newBooks in
+            saveBooks()
+            print("Books array changed - saving to storage")
         }
         .sheet(isPresented: $showingAddBook) {
             AddBookView(books: $books)
@@ -116,6 +115,8 @@ struct ContentView: View {
     }
     
     private func loadBooks() {
+        loadBooksFromStorage()
+        
         Task {
             await loadBooksFromAPI()
         }
@@ -127,7 +128,7 @@ struct ContentView: View {
         
         await MainActor.run {
             let apiBooks = getDefaultBooks()
-          
+            
             if !self.books.isEmpty {
                 self.books = mergeBooks(apiBooks: apiBooks, localBooks: self.books)
             } else {
@@ -135,7 +136,6 @@ struct ContentView: View {
             }
             
             self.isLoading = false
-            self.saveBooks() // Save data locally
             print("Successfully loaded \(apiBooks.count) books from API")
         }
     }
@@ -144,7 +144,10 @@ struct ContentView: View {
         if let data = UserDefaults.standard.data(forKey: booksKey) {
             do {
                 let decodedBooks = try JSONDecoder().decode([Book].self, from: data)
-                books = decodedBooks
+                
+                withAnimation(.none) {
+                    books = decodedBooks
+                }
                 print("Successfully loaded \(decodedBooks.count) books from storage")
             } catch {
                 print("Error decoding books: \(error)")
@@ -164,7 +167,12 @@ struct ContentView: View {
         do {
             let encoded = try JSONEncoder().encode(books)
             UserDefaults.standard.set(encoded, forKey: booksKey)
-            print("Successfully saved \(books.count) books")
+            print("Successfully saved \(books.count) books to UserDefaults")
+            
+            // Debug
+            for book in books.prefix(3) {
+                print("Book: \(book.title) - Genre: \(book.genre.rawValue) - Status: \(book.status.rawValue)")
+            }
         } catch {
             print("Error encoding books: \(error)")
         }
@@ -176,21 +184,26 @@ struct ContentView: View {
         }
     }
     
-    // Merge API books with local books
     private func mergeBooks(apiBooks: [Book], localBooks: [Book]) -> [Book] {
         var mergedBooks: [Book] = []
         
         for apiBook in apiBooks {
             if let existingBook = localBooks.first(where: { $0.id == apiBook.id ||
                 ($0.title == apiBook.title && $0.author == apiBook.author) }) {
-                var mergedBook = apiBook
-                mergedBook.id = existingBook.id // Keep the same ID
-                mergedBook.isFavorite = existingBook.isFavorite
-                mergedBook.rating = existingBook.rating
-                mergedBook.status = existingBook.status
+                let mergedBook = Book(
+                    id: existingBook.id,
+                    title: apiBook.title,
+                    author: apiBook.author,
+                    image: apiBook.image,
+                    description: apiBook.description,
+                    rating: existingBook.rating,
+                    review: existingBook.review,
+                    status: existingBook.status,
+                    genre: existingBook.genre,
+                    isFavorite: existingBook.isFavorite
+                )
                 mergedBooks.append(mergedBook)
             } else {
-                // New book from API
                 mergedBooks.append(apiBook)
             }
         }
@@ -200,17 +213,22 @@ struct ContentView: View {
                 mergedBooks.append(localBook)
             }
         }
+        let uniqueBooks = Dictionary(grouping: mergedBooks, by: { "\($0.title)-\($0.author)" })
+            .compactMap { $0.value.first }
         
-        return mergedBooks
+        return uniqueBooks
+       
     }
     
     func addBook(_ book: Book) {
         books.append(book)
+        print("Added new book: \(book.title)")
     }
     
     func updateBook(_ updatedBook: Book) {
         if let index = books.firstIndex(where: { $0.id == updatedBook.id }) {
             books[index] = updatedBook
+            print("Updated book: \(updatedBook.title) - Genre: \(updatedBook.genre.rawValue)")
         }
     }
     
@@ -218,30 +236,37 @@ struct ContentView: View {
         guard index >= 0 && index < filteredBooks.count else { return }
         let bookToDelete = filteredBooks[index]
         books.removeAll { $0.id == bookToDelete.id }
+        print("Deleted book: \(bookToDelete.title)")
     }
     
     func deleteBook(by id: UUID) {
-        books.removeAll { $0.id == id }
+        if let book = books.first(where: { $0.id == id }) {
+            books.removeAll { $0.id == id }
+            print("Deleted book: \(book.title)")
+        }
     }
     
     func toggleFavorite(for bookId: UUID) {
         if let index = books.firstIndex(where: { $0.id == bookId }) {
             books[index].isFavorite.toggle()
+            print("Toggled favorite for: \(books[index].title) - isFavorite: \(books[index].isFavorite)")
         }
     }
     
-    func updateBookStatus(_ bookId: UUID, to newStatus: BookReadingStatus) {
+    func updateBookStatus(_ bookId: UUID, to newStatus: BookStatus) {
         if let index = books.firstIndex(where: { $0.id == bookId }) {
             books[index].status = newStatus
+            print("Updated status for: \(books[index].title) - Status: \(newStatus.rawValue)")
         }
     }
     
     func updateBookRating(_ bookId: UUID, rating: Int) {
         if let index = books.firstIndex(where: { $0.id == bookId }) {
             books[index].rating = rating
+            print("Updated rating for: \(books[index].title) - Rating: \(rating)")
         }
     }
-    
+
     func clearSearch() {
         searchText = ""
     }
@@ -258,11 +283,11 @@ struct ContentView: View {
         return books.filter { $0.isFavorite }.count
     }
     
-    func getBooksByStatus(_ status: BookReadingStatus) -> [Book] {
+    func getBooksByStatus(_ status: BookStatus) -> [Book] {
         return books.filter { $0.status == status }
     }
     
-    func getBooksByGenre(_ genre: BookGenre) -> [Book] {
+    func getBooksByGenre(_ genre: Genre) -> [Book] {
         return books.filter { $0.genre == genre }
     }
     

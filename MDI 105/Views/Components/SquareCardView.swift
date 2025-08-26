@@ -90,9 +90,9 @@ struct SquareCardView: View {
             description: "A sample book description",
             rating: 4,
             review: "Great book!",
-            isFavorite: true,
             status: .finished,
-            genre: .fantasy
+            genre: .fantasy,
+            isFavorite: true
         ))
         
         SquareCardView(book: Book(
@@ -102,10 +102,11 @@ struct SquareCardView: View {
             description: "Description",
             rating: 3,
             review: "Good",
-            isFavorite: false,
             status: .reading,
-            genre: .classic
+            genre: .classic,
+            isFavorite: false
         ))
     }
     .padding()
 }
+   

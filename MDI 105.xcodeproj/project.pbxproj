@@ -6,8 +6,27 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		91784B752E5D3BB600C3BE37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 912E7DCE2E444107005EB6B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 912E7DD52E444107005EB6B3;
+			remoteInfo = "MDI 105";
+		};
+		91784B822E5D3C3700C3BE37 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 912E7DCE2E444107005EB6B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 912E7DD52E444107005EB6B3;
+			remoteInfo = "MDI 105";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		912E7DD62E444107005EB6B3 /* MDI 105.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MDI 105.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		91784B712E5D3BB600C3BE37 /* MDI 105Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MDI 105Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		91784B7E2E5D3C3700C3BE37 /* MDI 105_UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MDI 105_UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +35,29 @@
 			path = "MDI 105";
 			sourceTree = "<group>";
 		};
+		91784B7F2E5D3C3700C3BE37 /* MDI 105_UnitTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "MDI 105_UnitTests";
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		912E7DD32E444107005EB6B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		91784B6E2E5D3BB600C3BE37 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		91784B7B2E5D3C3700C3BE37 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				912E7DD82E444107005EB6B3 /* MDI 105 */,
+				91784B7F2E5D3C3700C3BE37 /* MDI 105_UnitTests */,
 				912E7DD72E444107005EB6B3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +80,8 @@
 			isa = PBXGroup;
 			children = (
 				912E7DD62E444107005EB6B3 /* MDI 105.app */,
+				91784B712E5D3BB600C3BE37 /* MDI 105Tests.xctest */,
+				91784B7E2E5D3C3700C3BE37 /* MDI 105_UnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +111,49 @@
 			productReference = 912E7DD62E444107005EB6B3 /* MDI 105.app */;
 			productType = "com.apple.product-type.application";
 		};
+		91784B702E5D3BB600C3BE37 /* MDI 105Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 91784B772E5D3BB600C3BE37 /* Build configuration list for PBXNativeTarget "MDI 105Tests" */;
+			buildPhases = (
+				91784B6D2E5D3BB600C3BE37 /* Sources */,
+				91784B6E2E5D3BB600C3BE37 /* Frameworks */,
+				91784B6F2E5D3BB600C3BE37 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				91784B762E5D3BB600C3BE37 /* PBXTargetDependency */,
+			);
+			name = "MDI 105Tests";
+			packageProductDependencies = (
+			);
+			productName = "MDI 105Tests";
+			productReference = 91784B712E5D3BB600C3BE37 /* MDI 105Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		91784B7D2E5D3C3700C3BE37 /* MDI 105_UnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 91784B842E5D3C3700C3BE37 /* Build configuration list for PBXNativeTarget "MDI 105_UnitTests" */;
+			buildPhases = (
+				91784B7A2E5D3C3700C3BE37 /* Sources */,
+				91784B7B2E5D3C3700C3BE37 /* Frameworks */,
+				91784B7C2E5D3C3700C3BE37 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				91784B832E5D3C3700C3BE37 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				91784B7F2E5D3C3700C3BE37 /* MDI 105_UnitTests */,
+			);
+			name = "MDI 105_UnitTests";
+			packageProductDependencies = (
+			);
+			productName = "MDI 105_UnitTests";
+			productReference = 91784B7E2E5D3C3700C3BE37 /* MDI 105_UnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -82,6 +166,14 @@
 				TargetAttributes = {
 					912E7DD52E444107005EB6B3 = {
 						CreatedOnToolsVersion = 16.4;
+					};
+					91784B702E5D3BB600C3BE37 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 912E7DD52E444107005EB6B3;
+					};
+					91784B7D2E5D3C3700C3BE37 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 912E7DD52E444107005EB6B3;
 					};
 				};
 			};
@@ -100,12 +192,28 @@
 			projectRoot = "";
 			targets = (
 				912E7DD52E444107005EB6B3 /* MDI 105 */,
+				91784B702E5D3BB600C3BE37 /* MDI 105Tests */,
+				91784B7D2E5D3C3700C3BE37 /* MDI 105_UnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		912E7DD42E444107005EB6B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		91784B6F2E5D3BB600C3BE37 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		91784B7C2E5D3C3700C3BE37 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +230,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		91784B6D2E5D3BB600C3BE37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		91784B7A2E5D3C3700C3BE37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		91784B762E5D3BB600C3BE37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 912E7DD52E444107005EB6B3 /* MDI 105 */;
+			targetProxy = 91784B752E5D3BB600C3BE37 /* PBXContainerItemProxy */;
+		};
+		91784B832E5D3C3700C3BE37 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 912E7DD52E444107005EB6B3 /* MDI 105 */;
+			targetProxy = 91784B822E5D3C3700C3BE37 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		912E7DDF2E444108005EB6B3 /* Debug */ = {
@@ -302,6 +437,78 @@
 			};
 			name = Release;
 		};
+		91784B782E5D3BB600C3BE37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8344Y5PFV3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.app.MDI-105Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MDI 105.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MDI 105";
+			};
+			name = Debug;
+		};
+		91784B792E5D3BB600C3BE37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8344Y5PFV3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.app.MDI-105Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MDI 105.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MDI 105";
+			};
+			name = Release;
+		};
+		91784B852E5D3C3700C3BE37 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8344Y5PFV3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.app.MDI-105-UnitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MDI 105.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MDI 105";
+			};
+			name = Debug;
+		};
+		91784B862E5D3C3700C3BE37 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8344Y5PFV3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.app.MDI-105-UnitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MDI 105.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MDI 105";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -319,6 +526,24 @@
 			buildConfigurations = (
 				912E7DE22E444108005EB6B3 /* Debug */,
 				912E7DE32E444108005EB6B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		91784B772E5D3BB600C3BE37 /* Build configuration list for PBXNativeTarget "MDI 105Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				91784B782E5D3BB600C3BE37 /* Debug */,
+				91784B792E5D3BB600C3BE37 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		91784B842E5D3C3700C3BE37 /* Build configuration list for PBXNativeTarget "MDI 105_UnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				91784B852E5D3C3700C3BE37 /* Debug */,
+				91784B862E5D3C3700C3BE37 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

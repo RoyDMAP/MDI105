@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BookListView: View {
     @Binding var books: [Book]
-    @Binding var selectedGenre: BookGenre?
+    @Binding var selectedGenre: Genre?
     let filteredBooks: [Book]
     @Binding var showingAddBook: Bool
     @State private var showingGenreFilter = false
@@ -139,7 +139,6 @@ struct BookRowView: View {
                     .frame(width: 40, height: 60)
                     .cornerRadius(4)
             } else if let bundleImage = UIImage(named: book.image) {
-                // Fall back to bundle resources
                 Image(uiImage: bundleImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -201,7 +200,7 @@ struct BookRowView: View {
         }
     }
     
-    private func genreColor(for genre: BookGenre) -> Color {
+    private func genreColor(for genre: Genre) -> Color {
         switch genre {
         case .classic: return .brown
         case .fantasy: return .purple
@@ -217,16 +216,24 @@ struct BookRowView: View {
         }
     }
     
-    private func statusColor(for status: BookReadingStatus) -> Color {
+    private func statusColor(for status: BookStatus) -> Color {
         switch status {
-        case .notStarted: return .gray
-        case .reading: return .blue
-        case .finished: return .green
-        case .planToRead: return .orange
+        case .toRead:
+            return .blue
+        case .reading:
+            return .orange
+        case .finished:
+            return .green
+        case .notStarted:
+            return .gray
+        case .paused:
+            return .yellow
+        case .abandoned:
+            return .red
         }
     }
 }
-// Extension for loading images from documents directory
+
 extension UIImage {
     static func loadFromDocuments(filename: String) -> UIImage? {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!

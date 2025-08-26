@@ -6,10 +6,7 @@
 //
 
 
-import SwiftUI
-import Foundation
-
-enum Genre: String, CaseIterable, Codable {
+enum Genre: String, CaseIterable, Codable, Hashable {
     case classic = "Classic"
     case fantasy = "Fantasy"
     case terror = "Terror"
@@ -21,5 +18,5 @@ enum Genre: String, CaseIterable, Codable {
     case sciFi = "Sci-Fi"
     case biography = "Biography"
     case history = "History"
+    
 }
-

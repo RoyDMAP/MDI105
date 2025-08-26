@@ -79,9 +79,30 @@ struct FavoritesView: View {
             description: "A sample book description",
             rating: 4,
             review: "Great book!",
-            isFavorite: true,
             status: .finished,
-            genre: .fantasy
+            genre: .fantasy,
+            isFavorite: true  // Moved to correct position
+        ),
+        Book(
+            title: "Another Favorite",
+            author: "Another Author",
+            image: "Pic2",
+            description: "Another great book",
+            rating: 5,
+            review: "Excellent read!",
+            status: .finished,
+            genre: .sciFi,
+            isFavorite: true
+        ),
+        Book(
+            title: "Not a Favorite",
+            author: "Test Author",
+            image: "Pic3",
+            description: "This book is not favorited",
+            rating: 3,
+            status: .reading,
+            genre: .mystery,
+            isFavorite: false  
         )
     ]))
 }

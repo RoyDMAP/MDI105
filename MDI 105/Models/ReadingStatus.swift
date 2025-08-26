@@ -7,11 +7,16 @@
 
 
 
+import Foundation
 import SwiftUI
 
-enum BookStatus: String, CaseIterable {
-    case notStarted = "Not Started"
+enum BookStatus: String, CaseIterable, Codable, Hashable {
+    case toRead = "To Read"
     case reading = "Reading"
     case finished = "Finished"
-    case planToRead = "Plan to Read"
+    case notStarted = "Not Started"
+    case paused = "Paused"
+    case abandoned = "Abandoned"
+    
+    
 }

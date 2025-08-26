@@ -12,32 +12,17 @@ struct EditBookView: View {
     @Binding var book: Book
     @Environment(\.dismiss) private var dismiss
     
-    @State private var title: String
-    @State private var author: String
-    @State private var image: String
-    @State private var description: String
-    @State private var rating: Int
-    @State private var review: String
-    @State private var status: BookReadingStatus
-    @State private var genre: BookGenre
-    @State private var isFavorite: Bool
+    @State private var title: String = ""
+    @State private var author: String = ""
+    @State private var image: String = ""
+    @State private var description: String = ""
+    @State private var rating: Int = 0
+    @State private var review: String = ""
+    @State private var status: BookStatus = .notStarted
+    @State private var genre: Genre = .fiction
+    @State private var isFavorite: Bool = false
     @State private var bookImage: UIImage?
     @State private var photoPickerItem: PhotosPickerItem?
-    
-    init(book: Binding<Book>) {
-        self._book = book
-        
-        // Initialize state variables with current book values
-        self._title = State(initialValue: book.wrappedValue.title)
-        self._author = State(initialValue: book.wrappedValue.author)
-        self._image = State(initialValue: book.wrappedValue.image)
-        self._description = State(initialValue: book.wrappedValue.description)
-        self._rating = State(initialValue: book.wrappedValue.rating)
-        self._review = State(initialValue: book.wrappedValue.review)
-        self._status = State(initialValue: book.wrappedValue.status)
-        self._genre = State(initialValue: book.wrappedValue.genre)
-        self._isFavorite = State(initialValue: book.wrappedValue.isFavorite)
-    }
     
     var body: some View {
         NavigationStack {
@@ -51,6 +36,10 @@ struct EditBookView: View {
             }
             .navigationTitle("Edit Book")
             .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+    
+                initializeState()
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
@@ -68,6 +57,18 @@ struct EditBookView: View {
         }
     }
     
+    private func initializeState() {
+        title = book.title
+        author = book.author
+        image = book.image
+        description = book.description
+        rating = book.rating
+        review = book.review
+        status = book.status
+        genre = book.genre
+        isFavorite = book.isFavorite
+    }
+    
     private var bookCoverSection: some View {
         Section(header: Text("Book cover")) {
             PhotosPicker(
@@ -81,7 +82,6 @@ struct EditBookView: View {
                         .frame(width: 120, height: 160)
                         .cornerRadius(8)
                 } else if !book.image.isEmpty {
-
                     if let existingImage = loadImageFromDocuments(filename: book.image) {
                         Image(uiImage: existingImage)
                             .resizable()
@@ -118,7 +118,6 @@ struct EditBookView: View {
                 Button("Remove New Image") {
                     bookImage = nil
                     photoPickerItem = nil
-                    // Keep original image name if reverting
                     image = book.image
                 }
                 .foregroundColor(.red)
@@ -145,26 +144,48 @@ struct EditBookView: View {
             TextField("Title", text: $title)
             TextField("Author", text: $author)
             TextField("Image Name (optional)", text: $image)
-                .disabled(bookImage != nil) // Disable if new image was selected
+                .disabled(bookImage != nil)
         }
     }
     
     private var categorySection: some View {
         Section("Category") {
-            Picker("Genre", selection: $genre) {
-                ForEach(BookGenre.allCases, id: \.self) { genre in  // Changed from Genre.allCases
-                    HStack {
-                        Circle()
-                            .fill(genreColor(for: genre))
-                            .frame(width: 12, height: 12)
-                        Text(genre.rawValue)
-                    }.tag(genre)
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Current Genre: \(genre.rawValue)")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                
+                Picker("Genre", selection: $genre) {
+                    ForEach(Genre.allCases, id: \.self) { genreOption in
+                        HStack {
+                            Circle()
+                                .fill(genreColor(for: genreOption))
+                                .frame(width: 12, height: 12)
+                            Text(genreOption.rawValue)
+                        }
+                        .tag(genreOption)
+                    }
+                }
+                .pickerStyle(.menu)
+                .onChange(of: genre) { oldValue, newValue in
+                    print("Genre changed from \(oldValue.rawValue) to \(newValue.rawValue)")
                 }
             }
             
-            Picker("Status", selection: $status) {
-                ForEach(BookReadingStatus.allCases, id: \.self) { status in  // Changed from BookStatus.allCases
-                    Text(status.rawValue).tag(status)
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Current Status: \(status.rawValue)")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                
+                Picker("Status", selection: $status) {
+                    ForEach(BookStatus.allCases, id: \.self) { statusOption in
+                        Text(statusOption.rawValue)
+                            .tag(statusOption)
+                    }
+                }
+                .pickerStyle(.menu)
+                .onChange(of: status) { oldValue, newValue in
+                    print("Status changed from \(oldValue.rawValue) to \(newValue.rawValue)")
                 }
             }
         }
@@ -200,7 +221,7 @@ struct EditBookView: View {
         }
     }
     
-    private func genreColor(for genre: BookGenre) -> Color {  // Changed parameter type
+    private func genreColor(for genre: Genre) -> Color {
         switch genre {
         case .classic: return .brown
         case .fantasy: return .purple
@@ -213,17 +234,6 @@ struct EditBookView: View {
         case .sciFi: return .cyan
         case .biography: return .orange
         case .history: return .yellow
-        }
-    }
-    
-    private var ratingDescription: String {
-        switch rating {
-        case 1: return "Poor"
-        case 2: return "Fair"
-        case 3: return "Good"
-        case 4: return "Very Good"
-        case 5: return "Excellent"
-        default: return ""
         }
     }
     
@@ -255,11 +265,17 @@ struct EditBookView: View {
         var finalImageName = image
         
         if let bookImage = bookImage {
-            // Save the new image to documents directory
             let imageName = image.isEmpty ? "book_cover_\(UUID().uuidString)" : image
             saveImageToDocuments(bookImage, filename: imageName)
             finalImageName = imageName
         }
+        
+        print("=== SAVE DEBUG ===")
+        print("Before save - Local genre: \(genre.rawValue)")
+        print("Before save - Local status: \(status.rawValue)")
+        print("Before save - Book genre: \(book.genre.rawValue)")
+        print("Before save - Book status: \(book.status.rawValue)")
+        
         book.title = title
         book.author = author
         book.image = finalImageName
@@ -269,6 +285,10 @@ struct EditBookView: View {
         book.status = status
         book.genre = genre
         book.isFavorite = isFavorite
+        
+        print("After save - Book genre: \(book.genre.rawValue)")
+        print("After save - Book status: \(book.status.rawValue)")
+        print("==================")
         
         dismiss()
     }
@@ -283,9 +303,9 @@ struct EditBookView: View {
             description: "A sample description",
             rating: 4,
             review: "Great book!",
-            isFavorite: false,
             status: .finished,
-            genre: .fantasy
+            genre: .fantasy,
+            isFavorite: false  
         ))
     )
 }

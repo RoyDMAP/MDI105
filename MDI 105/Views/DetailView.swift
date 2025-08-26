@@ -12,6 +12,7 @@ struct BookDetailView: View {
     @State private var showingEditSheet = false
     @State private var showingDeleteAlert = false
     @Environment(\.dismiss) private var dismiss
+    @State private var isAnimating = false
     
     var body: some View {
         ZStack {
@@ -108,7 +109,6 @@ struct BookDetailView: View {
     
     private var ratingAndFavoriteSection: some View {
         HStack {
-            // UPDATED: Display-only rating stars (not interactive)
             ForEach(1...5, id: \.self) { star in
                 Image(systemName: star <= book.rating ? "star.fill" : "star")
                     .foregroundColor(.yellow)
@@ -119,20 +119,32 @@ struct BookDetailView: View {
             
             Spacer()
             
+            // Heart button: Click to like, click again to clear like
             Button(action: {
-                book.isFavorite.toggle()
+                let impactFeedback = UIImpactFeedbackGenerator(style: .light)
+                impactFeedback.impactOccurred()
+                
+                // Toggle the favorite state with animation
+                withAnimation(.easeInOut(duration: 0.2)) {
+                    book.isFavorite.toggle()
+                }
             }) {
                 Image(systemName: book.isFavorite ? "heart.fill" : "heart")
                     .foregroundColor(book.isFavorite ? .red : .gray)
                     .font(.title2)
+                    .scaleEffect(book.isFavorite ? 1.15 : 1.0)
+                    .opacity(book.isFavorite ? 1.0 : 0.8)
             }
+            .buttonStyle(.plain)
+            .frame(width: 44, height: 44)
+            .contentShape(Rectangle())
+            .accessibilityLabel("\(book.rating) out of 5 stars. \(book.isFavorite ? "Favorited" : "Not favorited")")
+            .accessibilityHint(book.isFavorite ? "Tap to remove from favorites" : "Tap to add to favorites")
         }
-        .accessibilityLabel("\(book.rating) out of 5 stars. \(book.isFavorite ? "Favorited" : "Not favorited")")
     }
-    
     private var genreAndStatusSection: some View {
         HStack {
-            CapsuleView(text: book.genre.rawValue, color: .cyan)  // Changed to light blue
+            CapsuleView(text: book.genre.rawValue, color: .cyan)
             CapsuleView(text: book.status.rawValue, color: .blue)
             Spacer()
         }

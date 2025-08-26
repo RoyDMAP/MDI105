@@ -6,15 +6,15 @@
 //
 
 let NEW_BOOK = Book(
-    title: "", 
-    author: "", 
+    title: "",
+    author: "",
     image: "",
-    description: "", 
-    rating: 0, 
-    review: "", 
-    isFavorite: false,
-    status: .notStarted, 
-    genre: .classic
+    description: "",
+    rating: 0,
+    review: "",
+    status: .notStarted,
+    genre: .classic,       
+    isFavorite: false
 )
 
 let SETTINGS_THEME_KEY = "theme"

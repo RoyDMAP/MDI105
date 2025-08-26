@@ -11,7 +11,6 @@ struct FavoriteToggle: View {
     
     @Binding var isFavorite: Bool
     
-    // Add public initializer
     init(isFavorite: Binding<Bool>) {
         self._isFavorite = isFavorite
     }

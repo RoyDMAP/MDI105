@@ -18,8 +18,8 @@ struct AddBookView: View {
     @State private var description = ""
     @State private var rating = 0
     @State private var review = ""
-    @State private var status = BookReadingStatus.notStarted
-    @State private var genre = BookGenre.classic
+    @State private var status = BookStatus.notStarted
+    @State private var genre = Genre.classic
     @State private var bookImage: UIImage?
     @State private var photoPickerItem: PhotosPickerItem?
     
@@ -83,7 +83,7 @@ struct AddBookView: View {
                 
                 Section("Category") {
                     Picker("Genre", selection: $genre) {
-                        ForEach(BookGenre.allCases, id: \.self) { genre in
+                        ForEach(Genre.allCases, id: \.self) { genre in
                             HStack {
                                 Circle()
                                     .fill(genreColor(for: genre))
@@ -94,7 +94,7 @@ struct AddBookView: View {
                     }
                     
                     Picker("Status", selection: $status) {
-                        ForEach(BookReadingStatus.allCases, id: \.self) { status in
+                        ForEach(BookStatus.allCases, id: \.self) { status in
                             Text(status.rawValue).tag(status)
                         }
                     }
@@ -142,7 +142,7 @@ struct AddBookView: View {
         }
     }
     
-    private func genreColor(for genre: BookGenre) -> Color {
+    private func genreColor(for genre: Genre) -> Color {
         switch genre {
         case .classic: return .brown
         case .fantasy: return .purple
@@ -175,9 +175,9 @@ struct AddBookView: View {
             description: description,
             rating: rating,
             review: review,
-            isFavorite: false,
-            status: status,  // Now BookReadingStatus type
-            genre: genre     // Now BookGenre type
+            status: status,
+            genre: genre,
+            isFavorite: false      
         )
         
         books.append(newBook)  
