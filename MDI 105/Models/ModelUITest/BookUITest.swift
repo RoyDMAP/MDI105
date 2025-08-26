@@ -1,12 +1,10 @@
 //
-//  MDI_105_UnitTests.swift
-//  MDI 105_UnitTests
+//  BookUITest.swift
+//  MDI 105
 //
-//  Created by Roy Dimapilis on 8/25/25.
+//  Created by Roy Dimapilis on 8/26/25.
 //
-
-@testable import MDI_105
-
+// Simple test function
 func testBookUIDisplayProperties() {
     // Create a test book with UI-relevant properties
     let testBook = Book(

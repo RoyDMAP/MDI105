@@ -29,6 +29,23 @@
 		91784B7E2E5D3C3700C3BE37 /* MDI 105_UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MDI 105_UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		919A54672E5E7E36004E8E2E /* Exceptions for "MDI 105_UnitTests" folder in "MDI 105" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				FrameWorkTests.swift,
+			);
+			target = 912E7DD52E444107005EB6B3 /* MDI 105 */;
+		};
+		919A54682E5E7E36004E8E2E /* Exceptions for "MDI 105_UnitTests" folder in "MDI 105_UnitTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				FrameWorkTests.swift,
+			);
+			target = 91784B7D2E5D3C3700C3BE37 /* MDI 105_UnitTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		912E7DD82E444107005EB6B3 /* MDI 105 */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -37,6 +54,10 @@
 		};
 		91784B7F2E5D3C3700C3BE37 /* MDI 105_UnitTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				919A54672E5E7E36004E8E2E /* Exceptions for "MDI 105_UnitTests" folder in "MDI 105" target */,
+				919A54682E5E7E36004E8E2E /* Exceptions for "MDI 105_UnitTests" folder in "MDI 105_UnitTests" target */,
+			);
 			path = "MDI 105_UnitTests";
 			sourceTree = "<group>";
 		};
@@ -480,6 +501,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8344Y5PFV3;
+				ENABLE_TESTABILITY = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.app.MDI-105-UnitTests";
@@ -498,6 +520,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8344Y5PFV3;
+				ENABLE_TESTABILITY = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.app.MDI-105-UnitTests";
