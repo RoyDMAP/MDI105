@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXContainerItemProxy section */
+		916CB3232E5FD9DC00929DF6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 912E7DCE2E444107005EB6B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 912E7DD52E444107005EB6B3;
+			remoteInfo = "MDI 105";
+		};
 		91784B752E5D3BB600C3BE37 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 912E7DCE2E444107005EB6B3 /* Project object */;
@@ -25,26 +32,10 @@
 
 /* Begin PBXFileReference section */
 		912E7DD62E444107005EB6B3 /* MDI 105.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MDI 105.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		916CB31D2E5FD9DC00929DF6 /* MDI 105UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MDI 105UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91784B712E5D3BB600C3BE37 /* MDI 105Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MDI 105Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91784B7E2E5D3C3700C3BE37 /* MDI 105_UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MDI 105_UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		919A54672E5E7E36004E8E2E /* Exceptions for "MDI 105_UnitTests" folder in "MDI 105" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				FrameWorkTests.swift,
-			);
-			target = 912E7DD52E444107005EB6B3 /* MDI 105 */;
-		};
-		919A54682E5E7E36004E8E2E /* Exceptions for "MDI 105_UnitTests" folder in "MDI 105_UnitTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				FrameWorkTests.swift,
-			);
-			target = 91784B7D2E5D3C3700C3BE37 /* MDI 105_UnitTests */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		912E7DD82E444107005EB6B3 /* MDI 105 */ = {
@@ -52,12 +43,13 @@
 			path = "MDI 105";
 			sourceTree = "<group>";
 		};
+		916CB31E2E5FD9DC00929DF6 /* MDI 105UITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "MDI 105UITests";
+			sourceTree = "<group>";
+		};
 		91784B7F2E5D3C3700C3BE37 /* MDI 105_UnitTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				919A54672E5E7E36004E8E2E /* Exceptions for "MDI 105_UnitTests" folder in "MDI 105" target */,
-				919A54682E5E7E36004E8E2E /* Exceptions for "MDI 105_UnitTests" folder in "MDI 105_UnitTests" target */,
-			);
 			path = "MDI 105_UnitTests";
 			sourceTree = "<group>";
 		};
@@ -65,6 +57,13 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		912E7DD32E444107005EB6B3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		916CB31A2E5FD9DC00929DF6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -93,6 +92,7 @@
 			children = (
 				912E7DD82E444107005EB6B3 /* MDI 105 */,
 				91784B7F2E5D3C3700C3BE37 /* MDI 105_UnitTests */,
+				916CB31E2E5FD9DC00929DF6 /* MDI 105UITests */,
 				912E7DD72E444107005EB6B3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,6 +103,7 @@
 				912E7DD62E444107005EB6B3 /* MDI 105.app */,
 				91784B712E5D3BB600C3BE37 /* MDI 105Tests.xctest */,
 				91784B7E2E5D3C3700C3BE37 /* MDI 105_UnitTests.xctest */,
+				916CB31D2E5FD9DC00929DF6 /* MDI 105UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,6 +132,29 @@
 			productName = "MDI 105";
 			productReference = 912E7DD62E444107005EB6B3 /* MDI 105.app */;
 			productType = "com.apple.product-type.application";
+		};
+		916CB31C2E5FD9DC00929DF6 /* MDI 105UITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 916CB3272E5FD9DC00929DF6 /* Build configuration list for PBXNativeTarget "MDI 105UITests" */;
+			buildPhases = (
+				916CB3192E5FD9DC00929DF6 /* Sources */,
+				916CB31A2E5FD9DC00929DF6 /* Frameworks */,
+				916CB31B2E5FD9DC00929DF6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				916CB3242E5FD9DC00929DF6 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				916CB31E2E5FD9DC00929DF6 /* MDI 105UITests */,
+			);
+			name = "MDI 105UITests";
+			packageProductDependencies = (
+			);
+			productName = "MDI 105UITests";
+			productReference = 916CB31D2E5FD9DC00929DF6 /* MDI 105UITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		91784B702E5D3BB600C3BE37 /* MDI 105Tests */ = {
 			isa = PBXNativeTarget;
@@ -188,6 +212,10 @@
 					912E7DD52E444107005EB6B3 = {
 						CreatedOnToolsVersion = 16.4;
 					};
+					916CB31C2E5FD9DC00929DF6 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 912E7DD52E444107005EB6B3;
+					};
 					91784B702E5D3BB600C3BE37 = {
 						CreatedOnToolsVersion = 16.4;
 						TestTargetID = 912E7DD52E444107005EB6B3;
@@ -215,12 +243,20 @@
 				912E7DD52E444107005EB6B3 /* MDI 105 */,
 				91784B702E5D3BB600C3BE37 /* MDI 105Tests */,
 				91784B7D2E5D3C3700C3BE37 /* MDI 105_UnitTests */,
+				916CB31C2E5FD9DC00929DF6 /* MDI 105UITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		912E7DD42E444107005EB6B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		916CB31B2E5FD9DC00929DF6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -251,6 +287,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		916CB3192E5FD9DC00929DF6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		91784B6D2E5D3BB600C3BE37 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -268,6 +311,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		916CB3242E5FD9DC00929DF6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 912E7DD52E444107005EB6B3 /* MDI 105 */;
+			targetProxy = 916CB3232E5FD9DC00929DF6 /* PBXContainerItemProxy */;
+		};
 		91784B762E5D3BB600C3BE37 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 912E7DD52E444107005EB6B3 /* MDI 105 */;
@@ -458,6 +506,40 @@
 			};
 			name = Release;
 		};
+		916CB3252E5FD9DC00929DF6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8344Y5PFV3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.app.MDI-105UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "MDI 105";
+			};
+			name = Debug;
+		};
+		916CB3262E5FD9DC00929DF6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8344Y5PFV3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.app.MDI-105UITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "MDI 105";
+			};
+			name = Release;
+		};
 		91784B782E5D3BB600C3BE37 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -549,6 +631,15 @@
 			buildConfigurations = (
 				912E7DE22E444108005EB6B3 /* Debug */,
 				912E7DE32E444108005EB6B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		916CB3272E5FD9DC00929DF6 /* Build configuration list for PBXNativeTarget "MDI 105UITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				916CB3252E5FD9DC00929DF6 /* Debug */,
+				916CB3262E5FD9DC00929DF6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
