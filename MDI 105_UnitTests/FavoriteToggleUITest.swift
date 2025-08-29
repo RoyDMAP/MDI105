@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+@testable import MDI_105
 
 // Simple test function for FavoriteToggle
 func testFavoriteToggleUI() {

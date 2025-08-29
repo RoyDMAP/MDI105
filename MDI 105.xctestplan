@@ -1,0 +1,45 @@
+{
+  "configurations" : [
+    {
+      "id" : "9B0FFB2B-723D-4BBA-8B9F-C6EF7EB82EB8",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:MDI 105.xcodeproj",
+      "identifier" : "912E7DD52E444107005EB6B3",
+      "name" : "MDI 105"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MDI 105.xcodeproj",
+        "identifier" : "91784B702E5D3BB600C3BE37",
+        "name" : "MDI 105Tests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MDI 105.xcodeproj",
+        "identifier" : "91784B7D2E5D3C3700C3BE37",
+        "name" : "MDI 105_UnitTests"
+      }
+    },
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:MDI 105.xcodeproj",
+        "identifier" : "916CB31C2E5FD9DC00929DF6",
+        "name" : "MDI 105UITests"
+      }
+    }
+  ],
+  "version" : 1
+}

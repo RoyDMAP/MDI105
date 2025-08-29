@@ -6,6 +6,7 @@
 //
 // Simple test function
 import Testing
+import SnapshotTesting
 
 // Define the Genre enum
 enum Genre {

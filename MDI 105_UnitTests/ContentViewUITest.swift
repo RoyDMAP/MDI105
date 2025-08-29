@@ -5,7 +5,8 @@
 //  Created by Roy Dimapilis on 8/26/25.
 //
 
-import SwiftUI
+@testable import MDI_105
+import Testing
 
 // UI test for ContentView labels and buttons
 func testContentViewLabelsAndButtons() {

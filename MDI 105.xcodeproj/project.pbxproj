@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		916CB3462E5FF15F00929DF6 /* InlineSnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 916CB3452E5FF15F00929DF6 /* InlineSnapshotTesting */; };
+		916CB3482E5FF15F00929DF6 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 916CB3472E5FF15F00929DF6 /* SnapshotTesting */; };
+		916CB34A2E5FF15F00929DF6 /* SnapshotTestingCustomDump in Frameworks */ = {isa = PBXBuildFile; productRef = 916CB3492E5FF15F00929DF6 /* SnapshotTestingCustomDump */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		916CB3232E5FD9DC00929DF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -35,6 +41,7 @@
 		916CB31D2E5FD9DC00929DF6 /* MDI 105UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MDI 105UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91784B712E5D3BB600C3BE37 /* MDI 105Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MDI 105Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91784B7E2E5D3C3700C3BE37 /* MDI 105_UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MDI 105_UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		91D7280F2E6137FC004BF4A0 /* MDI 105.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "MDI 105.xctestplan"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -81,6 +88,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				916CB34A2E5FF15F00929DF6 /* SnapshotTestingCustomDump in Frameworks */,
+				916CB3462E5FF15F00929DF6 /* InlineSnapshotTesting in Frameworks */,
+				916CB3482E5FF15F00929DF6 /* SnapshotTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +100,7 @@
 		912E7DCD2E444107005EB6B3 = {
 			isa = PBXGroup;
 			children = (
+				91D7280F2E6137FC004BF4A0 /* MDI 105.xctestplan */,
 				912E7DD82E444107005EB6B3 /* MDI 105 */,
 				91784B7F2E5D3C3700C3BE37 /* MDI 105_UnitTests */,
 				916CB31E2E5FD9DC00929DF6 /* MDI 105UITests */,
@@ -194,6 +205,9 @@
 			);
 			name = "MDI 105_UnitTests";
 			packageProductDependencies = (
+				916CB3452E5FF15F00929DF6 /* InlineSnapshotTesting */,
+				916CB3472E5FF15F00929DF6 /* SnapshotTesting */,
+				916CB3492E5FF15F00929DF6 /* SnapshotTestingCustomDump */,
 			);
 			productName = "MDI 105_UnitTests";
 			productReference = 91784B7E2E5D3C3700C3BE37 /* MDI 105_UnitTests.xctest */;
@@ -235,6 +249,9 @@
 			);
 			mainGroup = 912E7DCD2E444107005EB6B3;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				916CB3442E5FF15F00929DF6 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 912E7DD72E444107005EB6B3 /* Products */;
 			projectDirPath = "";
@@ -663,6 +680,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		916CB3442E5FF15F00929DF6 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.18.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		916CB3452E5FF15F00929DF6 /* InlineSnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 916CB3442E5FF15F00929DF6 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = InlineSnapshotTesting;
+		};
+		916CB3472E5FF15F00929DF6 /* SnapshotTesting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 916CB3442E5FF15F00929DF6 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTesting;
+		};
+		916CB3492E5FF15F00929DF6 /* SnapshotTestingCustomDump */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 916CB3442E5FF15F00929DF6 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
+			productName = SnapshotTestingCustomDump;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 912E7DCE2E444107005EB6B3 /* Project object */;
 }

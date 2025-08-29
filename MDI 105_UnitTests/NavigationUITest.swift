@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+@testable import MDI_105
 
 // navigation test for ContentView screens
 func testNavigationBetweenScreens() {
