@@ -41,6 +41,8 @@ struct BookDetailView: View {
                     Button("Edit") {
                         showingEditSheet = true
                     }
+                    .accessibilityLabel("Edit \(book.title)")
+                    .accessibilityHint("Opens edit form for this book")
                     
                     Button(action: {
                         showingDeleteAlert = true
@@ -48,6 +50,8 @@ struct BookDetailView: View {
                         Image(systemName: "trash")
                             .foregroundColor(.red)
                     }
+                    .accessibilityLabel("Delete \(book.title)")
+                    .accessibilityHint("Permanently removes this book from your library")
                 }
             }
         }
@@ -81,7 +85,8 @@ struct BookDetailView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 250)
                     .cornerRadius(10)
-                    .accessibilityLabel("\(book.title) cover image")
+                    .accessibilityLabel("Book cover for \(book.title)")
+                    .accessibilityAddTraits(.isImage)
             } else {
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.gray.opacity(0.2))
@@ -91,6 +96,8 @@ struct BookDetailView: View {
                             .font(.system(size: 60))
                             .foregroundColor(.gray)
                     )
+                    .accessibilityLabel("No cover image available for \(book.title)")
+                    .accessibilityAddTraits(.isImage)
             }
         }
     }
@@ -100,31 +107,37 @@ struct BookDetailView: View {
             Text(book.title)
                 .font(.title)
                 .fontWeight(.bold)
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityLabel("Book title: \(book.title)")
             
             Text("by \(book.author)")
                 .font(.title2)
                 .foregroundColor(.secondary)
+                .accessibilityLabel("Author: \(book.author)")
         }
     }
     
     private var ratingAndFavoriteSection: some View {
         HStack {
-            ForEach(1...5, id: \.self) { star in
-                Image(systemName: star <= book.rating ? "star.fill" : "star")
-                    .foregroundColor(.yellow)
-                    .font(.title3)
+            HStack {
+                ForEach(1...5, id: \.self) { star in
+                    Image(systemName: star <= book.rating ? "star.fill" : "star")
+                        .foregroundColor(.yellow)
+                        .font(.title3)
+                }
+                Text("(\(book.rating)/5)")
+                    .foregroundColor(.secondary)
             }
-            Text("(\(book.rating)/5)")
-                .foregroundColor(.secondary)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Rating: \(book.rating) out of 5 stars")
+            .accessibilityAddTraits(.isStaticText)
             
             Spacer()
             
-            // Heart button: Click to like, click again to clear like
             Button(action: {
                 let impactFeedback = UIImpactFeedbackGenerator(style: .light)
                 impactFeedback.impactOccurred()
                 
-                // Toggle the favorite state with animation
                 withAnimation(.easeInOut(duration: 0.2)) {
                     book.isFavorite.toggle()
                 }
@@ -138,14 +151,19 @@ struct BookDetailView: View {
             .buttonStyle(.plain)
             .frame(width: 44, height: 44)
             .contentShape(Rectangle())
-            .accessibilityLabel("\(book.rating) out of 5 stars. \(book.isFavorite ? "Favorited" : "Not favorited")")
-            .accessibilityHint(book.isFavorite ? "Tap to remove from favorites" : "Tap to add to favorites")
+            .accessibilityLabel(book.isFavorite ? "Toggle favorite off" : "Toggle favorite on")
+            .accessibilityHint(book.isFavorite ? "Currently favorited" : "Not currently favorited")
+            .accessibilityAddTraits(.isButton)
         }
     }
     private var genreAndStatusSection: some View {
         HStack {
             CapsuleView(text: book.genre.rawValue, color: .cyan)
+                .accessibilityLabel("Genre: \(book.genre.rawValue)")
+                .accessibilityAddTraits(.isStaticText)
             CapsuleView(text: book.status.rawValue, color: .blue)
+                .accessibilityLabel("Status: \(book.status.rawValue)")
+                .accessibilityAddTraits(.isStaticText)
             Spacer()
         }
     }
@@ -155,10 +173,12 @@ struct BookDetailView: View {
             Text("Description")
                 .font(.headline)
                 .padding(.top)
+                .accessibilityAddTraits(.isHeader)
             
             Text(book.description)
                 .font(.body)
                 .foregroundColor(.primary)
+                .accessibilityLabel("Book description: \(book.description)")
         }
     }
     
@@ -169,11 +189,13 @@ struct BookDetailView: View {
                 Text("Review")
                     .font(.headline)
                     .padding(.top)
+                    .accessibilityAddTraits(.isHeader)
                 
                 Text(book.review)
                     .font(.body)
                     .foregroundColor(.primary)
                     .italic()
+                    .accessibilityLabel("Your review: \(book.review)")
             }
         }
     }
@@ -186,6 +208,8 @@ struct BookDetailView: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .frame(maxWidth: .infinity)
+                .accessibilityLabel("Mark \(book.title) as read")
+                .accessibilityHint("Changes book status to finished")
             }
             
             if book.status != .reading && book.status != .finished {
@@ -194,6 +218,8 @@ struct BookDetailView: View {
                 }
                 .buttonStyle(.bordered)
                 .frame(maxWidth: .infinity)
+                .accessibilityLabel("Start reading \(book.title)")
+                .accessibilityHint("Changes book status to currently reading")
             }
         }
         .padding(.top)
@@ -205,5 +231,3 @@ struct BookDetailView: View {
         dismiss()
     }
 }
-
-

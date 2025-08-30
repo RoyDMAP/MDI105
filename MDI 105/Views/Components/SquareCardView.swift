@@ -78,6 +78,9 @@ struct SquareCardView: View {
         .background(Color(.systemBackground))
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 4, x: 0, y: 2)
+        .id(book.id)
+        .accessibilityLabel("\"book.title) by \(book.author)")
+        .accessibilityHint("Book in \(book.genre.rawValue) genre, currently \(book.status.rawValue)")
     }
 }
 
