@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1640"
-   version = "2.2">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES"
       buildArchitectures = "Automatic">
-      <BuildActionEntries>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <AutocreatedTestPlanReference>
-            </AutocreatedTestPlanReference>
-         </BuildActionEntry>
-      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -30,9 +19,9 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "916CB31C2E5FD9DC00929DF6"
-               BuildableName = "MDI 105UITests.xctest"
-               BlueprintName = "MDI 105UITests"
+               BlueprintIdentifier = "91784B702E5D3BB600C3BE37"
+               BuildableName = "MDI 105Tests.xctest"
+               BlueprintName = "MDI 105Tests"
                ReferencedContainer = "container:MDI 105.xcodeproj">
             </BuildableReference>
          </TestableReference>

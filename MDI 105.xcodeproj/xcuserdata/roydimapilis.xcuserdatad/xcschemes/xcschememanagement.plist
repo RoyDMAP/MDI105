@@ -4,30 +4,33 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Copy of MDI 105UITests.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
 		<key>MDI 105.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>4</integer>
 		</dict>
 		<key>MDI 105Tests.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<key>MDI 105UITests.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
 		<key>MDI 105_UnitTests.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>3</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -38,6 +41,16 @@
 			<true/>
 		</dict>
 		<key>916CB31C2E5FD9DC00929DF6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>91784B702E5D3BB600C3BE37</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>91784B7D2E5D3C3700C3BE37</key>
 		<dict>
 			<key>primary</key>
 			<true/>

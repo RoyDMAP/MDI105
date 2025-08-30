@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1640"
-   version = "2.2">
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES"
       buildArchitectures = "Automatic">
-      <BuildActionEntries>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <AutocreatedTestPlanReference>
-            </AutocreatedTestPlanReference>
-         </BuildActionEntry>
-      </BuildActionEntries>
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
@@ -30,9 +19,9 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "916CB31C2E5FD9DC00929DF6"
-               BuildableName = "MDI 105UITests.xctest"
-               BlueprintName = "MDI 105UITests"
+               BlueprintIdentifier = "91784B7D2E5D3C3700C3BE37"
+               BuildableName = "MDI 105_UnitTests.xctest"
+               BlueprintName = "MDI 105_UnitTests"
                ReferencedContainer = "container:MDI 105.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -48,16 +37,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "912E7DD52E444107005EB6B3"
-            BuildableName = "MDI 105.app"
-            BlueprintName = "MDI 105"
-            ReferencedContainer = "container:MDI 105.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -65,15 +44,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "916CB31C2E5FD9DC00929DF6"
-            BuildableName = "MDI 105UITests.xctest"
-            BlueprintName = "MDI 105UITests"
-            ReferencedContainer = "container:MDI 105.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
