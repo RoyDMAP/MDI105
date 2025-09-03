@@ -13,7 +13,7 @@ let NEW_BOOK = Book(
     rating: 0,
     review: "",
     status: .notStarted,
-    genre: .classic,       
+    genre: .classic,
     isFavorite: false
 )
 

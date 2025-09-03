@@ -305,7 +305,7 @@ struct EditBookView: View {
             review: "Great book!",
             status: .finished,
             genre: .fantasy,
-            isFavorite: false  
+            isFavorite: false
         ))
     )
 }

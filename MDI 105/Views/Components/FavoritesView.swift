@@ -47,7 +47,7 @@ struct FavoritesView: View {
                         ForEach(favoriteBooks) { book in
                             NavigationLink(destination: BookDetailView(
                                 book: binding(for: book),
-                                books: $books  
+                                books: $books
                             )) {
                                 SquareCardView(book: book)
                             }
@@ -102,7 +102,7 @@ struct FavoritesView: View {
             rating: 3,
             status: .reading,
             genre: .mystery,
-            isFavorite: false  
+            isFavorite: false
         )
     ]))
 }

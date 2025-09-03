@@ -1,8 +1,8 @@
 //
-//  GenreFilterView.swift
+//  FilterView.swift
 //  MDI 105
 //
-//  Created by Roy Dimapilis on 8/18/25.
+//  Created by Roy Dimapilis on 9/1/25.
 //
 
 import SwiftUI
@@ -122,7 +122,7 @@ struct GenreRow: View {
             Button(action: action) {
                 HStack {
                     Circle()
-                        .fill(genreColor)  
+                        .fill(genreColor)
                         .frame(width: 12, height: 12)
                     
                     Text(genre.rawValue)

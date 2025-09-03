@@ -39,7 +39,7 @@ struct SquareCardView: View {
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
                 .foregroundColor(.primary)
-                .frame(height: 44, alignment: .top)  
+                .frame(height: 44, alignment: .top)
             
             Text(book.author)
                 .font(.subheadline)

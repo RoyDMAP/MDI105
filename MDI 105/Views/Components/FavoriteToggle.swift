@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FavoriteToggle: View {  
+struct FavoriteToggle: View {
     
     @Binding var isFavorite: Bool
     

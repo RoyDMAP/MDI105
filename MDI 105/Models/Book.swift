@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-// MARK: - Book Model
 struct Book: Identifiable, Codable, Hashable, Equatable {
     let id: UUID
     var title: String

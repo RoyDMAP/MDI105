@@ -177,10 +177,10 @@ struct AddBookView: View {
             review: review,
             status: status,
             genre: genre,
-            isFavorite: false      
+            isFavorite: false
         )
         
-        books.append(newBook)  
+        books.append(newBook)
         dismiss()
     }
     
