@@ -59,7 +59,7 @@ class BookImageDetailViewUITest: XCTestCase {
         }
         
         // Does image exist
-        let imageSection = app.otherElements.matching(NSPredicate(format: "identifier == 'bookCoverSection'")).firstMatch
+        _ = app.otherElements.matching(NSPredicate(format: "identifier == 'bookCoverSection'")).firstMatch
         
         // Image related
         let hasImageContent = bookImage.exists ||
