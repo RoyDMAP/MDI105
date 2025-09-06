@@ -41,11 +41,11 @@ struct ContentView: View {
         }
     }
     
-    // Optimized for more efficient filtering with early returns
+    // Optimized for more efficient filtering 
     private var filteredBooks: [Book] {
         var result = books
         
-        // Apply search filter first (potentially reduces dataset)
+        // search filter first
         if !searchText.isEmpty {
             let lowercasedSearch = searchText.lowercased()
             result = result.filter { book in
@@ -55,7 +55,7 @@ struct ContentView: View {
             }
         }
         
-        // Apply genre filter
+        // genre filter
         if let selectedGenre = selectedGenre {
             result = result.filter { $0.genre == selectedGenre }
         }
@@ -96,7 +96,7 @@ struct ContentView: View {
         .preferredColorScheme(colorScheme)
         .tint(appAccentColor)
         .onAppear {
-            // OPTIMIZATION: Remove redundant check
+            // Remove redundant check
             guard !hasLoadedInitialData else { return }
             hasLoadedInitialData = true
             loadBooks()
@@ -146,7 +146,7 @@ struct ContentView: View {
         }
     }
     
-    // Keep original async method for compatibility but rename
+    // Keep original async method for compatibility
     @MainActor
     private func loadBooksFromAPI() async {
         isLoading = true
@@ -188,7 +188,7 @@ struct ContentView: View {
         books = getDefaultBooks()
     }
     
-    // Optimized background encoding
+    // Optimized background
     private func saveBooks() {
         let booksToSave = books // Capture current state
         
@@ -254,7 +254,6 @@ struct ContentView: View {
         return mergedBooks
     }
     
-    // Optimized efficient CRUD operations
     func addBook(_ book: Book) {
         books.append(book)
         print("Added new book: \(book.title)")

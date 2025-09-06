@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - Network Service Protocol and Implementation
 protocol NetworkServiceProtocol {
     func fetchData(url: URL, completion: @escaping (Result<Data, Error>) -> Void)
     func fetchBooks(completion: @escaping (Result<[Book], Error>) -> Void)
